@@ -87,7 +87,7 @@ if st.button('Act as Kyrie Irving, Fourth-Year Student Applicant',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/40_Sankey.py')
+    st.switch_page('pages/41_Kyrie_Info.py')
 
 
 
