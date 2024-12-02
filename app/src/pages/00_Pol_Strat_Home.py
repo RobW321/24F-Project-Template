@@ -15,66 +15,33 @@ st.title(f"Welcome, {st.session_state.get('first_name', 'Guest')}.")
 st.write("### Current Applications")
 
 # Example data: List of applications
-applications = [
-    {"name": "Nvidia", "url": "Nvidia.com/jobs", "status": "accepted", "favorite": True},
-    {"name": "Google", "url": "Google.com/openings", "status": "pending", "favorite": True},
-    {"name": "Apple", "url": "Apple.com/careers", "status": "rejected", "favorite": False},
-    {"name": "Epic", "url": "Epic.com/careers", "status": "accepted", "favorite": False},
-    {"name": "Facebook", "url": "Facebook.com/job", "status": "pending", "favorite": False},
-    {"name": "Steam", "url": "Steam.com/jobs", "status": "pending", "favorite": True},
-    {"name": "Amazon", "url": "Amazon.com/careers", "status": "rejected", "favorite": False},
-    {"name": "AMD", "url": "AMD.com/internships", "status": "rejected", "favorite": False},
-    {"name": "Samsung", "url": "Samsung.com/careers", "status": "pending", "favorite": False},
-]
+if 'applications' not in st.session_state:
+    st.session_state['applications'] = [
+        {"name": "Nvidia", "url": "https://www.nvidia.com/jobs", "status": "accepted", "favorite": True, "page": "pages/01_Nvidia_Page.py"},
+        {"name": "Google", "url": "https://www.google.com/openings", "status": "pending", "favorite": True, "page": "pages/02_Google_Page.py"},
+        {"name": "Apple", "url": "https://www.apple.com/careers", "status": "rejected", "favorite": False, "page": "pages/03_Apple_Page.py"},
+        {"name": "Epic", "url": "https://www.epic.com/careers", "status": "accepted", "favorite": False, "page": "pages/04_Epic_Page.py"},
+        {"name": "Facebook", "url": "https://www.facebook.com/job", "status": "pending", "favorite": False, "page": "pages/05_Facebook_Page.py"},
+        {"name": "Steam", "url": "https://www.steam.com/jobs", "status": "pending", "favorite": True, "page": "pages/06_Steam_Page.py"},
+        {"name": "Amazon", "url": "https://www.amazon.com/careers", "status": "rejected", "favorite": False, "page": "pages/07_Amazon_Page.py"},
+        {"name": "AMD", "url": "https://www.amd.com/internships", "status": "rejected", "favorite": False, "page": "pages/08_AMD_Page.py"},
+        {"name": "Samsung", "url": "https://www.samsung.com/careers", "status": "pending", "favorite": False, "page": "pages/09_Samsung_Page.py"},
+    ]
 
 # Sort applications by favorite status
-applications = sorted(applications, key=lambda x: not x['favorite'])
+applications = sorted(st.session_state['applications'], key=lambda x: not x['favorite'])
 
-# Add sorting header
-col1, col2 = st.columns([6, 1])  # Adjust widths as needed
-with col1:
-    st.write("Sort By: **Favorites**, Status")  # Placeholder for sorting logic
-with col2:
-    st.write(" ")
-
-# Display applications in a table-like layout
+# Display each application as a button
 for app in applications:
-    # Outline each row with a box
-    with st.container():
-        cols = st.columns([1, 4, 3, 1])  # Adjust column widths for alignment
+    # Format button text with details
+    favorite_icon = "⭐" if app["favorite"] else "☆"
+    status_icon = "✅" if app["status"] == "accepted" else "❌" if app["status"] == "rejected" else "⏳"
+    button_text = f"{favorite_icon} {app['name']} - Status: {status_icon}"
 
-        # Favorite toggle (star)
-        with cols[0]:
-            if st.button("⭐" if app["favorite"] else "☆", key=f"fav_{app['name']}"):
-                app["favorite"] = not app["favorite"]  # Toggle favorite status
-
-        # Application name and URL
-        with cols[1]:
-            st.markdown(f"<div style='border: 1px solid #ccc; padding: 5px;'>"
-                        f"<a href='{app['url']}' target='_blank'>{app['name']}</a>"
-                        f"</div>",
-                        unsafe_allow_html=True)
-
-        # Single status button
-        with cols[2]:
-            current_status = app["status"]
-            if current_status == "accepted":
-                button_label = "✅ Accepted"
-            elif current_status == "rejected":
-                button_label = "❌ Rejected"
-            else:
-                button_label = "⏳ Pending"
-
-            # Clickable button to toggle status
-            if st.button(button_label, key=f"status_{app['name']}"):
-                # Cycle through statuses: pending -> accepted -> rejected
-                if current_status == "pending":
-                    app["status"] = "accepted"
-                elif current_status == "accepted":
-                    app["status"] = "rejected"
-                elif current_status == "rejected":
-                    app["status"] = "pending"
-
-        # Border styling for each row
-        with cols[3]:
-            st.write("")
+    # Render button
+    if st.button(button_text, type="primary", use_container_width=True, key=app["name"]):
+        # Redirect to the application's specific page
+        logger.info(f"Redirecting to page for {app['name']}")
+        st.session_state['authenticated'] = True
+        st.session_state['current_application'] = app['name']
+        st.switch_page(app["page"])
