@@ -27,7 +27,7 @@ st.session_state['authenticated'] = False
 # IMPORTANT: ensure src/.streamlit/config.toml sets
 # showSidebarNavigation = false in the [client] section
 SideBarLinks(show_home=True)
-
+ 
 # ***************************************************
 #    The major content of this page
 # ***************************************************
@@ -87,7 +87,7 @@ if st.button('Act as Kyrie Irving, Fourth-Year Student Applicant',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
-    st.switch_page('pages/40_Sankey.py')
+    st.switch_page('pages/41_Kyrie_Info.py')
 
 
 
