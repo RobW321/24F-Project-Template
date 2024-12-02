@@ -9,9 +9,9 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Kyrie Irving Home Page')
+st.title('Josh Brown Home Page')
 
 if st.button('Sankey Diagram', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/41_Kyrie_Info.py')
+  st.switch_page('pages/40_Sankey.py')
