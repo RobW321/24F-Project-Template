@@ -11,7 +11,7 @@ SideBarLinks()
 
 st.title('Kyrie Irving Home Page')
 
-if st.button('Sankey Diagram', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/41_Kyrie_Info.py')
+st.title(f"Welcome, Kyrie.")
+st.write('')
+st.write('')
+st.write('### What would you like to do today?')
