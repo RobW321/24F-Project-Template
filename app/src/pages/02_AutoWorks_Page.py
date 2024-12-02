@@ -2,6 +2,9 @@ import streamlit as st
 
 # Page Title
 st.title("AutoWorks - Application Details")
+from modules.nav import SideBarLinks
+
+SideBarLinks()
 
 # Retrieve application details
 app_name = "AutoWorks"

@@ -1,5 +1,7 @@
 import streamlit as st
+from modules.nav import SideBarLinks
 
+SideBarLinks()
 # Page Title
 st.title("TechCorp - Application Details")
 
