@@ -42,7 +42,7 @@ st.write('### HI! As which user would you like to log in?')
 # functionality, we put a button on the screen that the user 
 # can click to MIMIC logging in as that mock user. 
 
-if st.button("Act as John, a Political Strategy Advisor", 
+if st.button("Act as Joe Wellington, a Regular Student Applicant", 
             type = 'primary', 
             use_container_width=True):
     # when user clicks the button, they are now considered authenticated
@@ -57,7 +57,7 @@ if st.button("Act as John, a Political Strategy Advisor",
     logger.info("Logging in as Political Strategy Advisor Persona")
     st.switch_page('pages/00_Pol_Strat_Home.py')
 
-if st.button('Act as Mohammad, an USAID worker', 
+if st.button('Act as Josh Brown, Data-Driven Applicant', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
@@ -65,13 +65,31 @@ if st.button('Act as Mohammad, an USAID worker',
     st.session_state['first_name'] = 'Mohammad'
     st.switch_page('pages/10_USAID_Worker_Home.py')
 
-if st.button('Act as System Administrator', 
+if st.button('Act as Thomas Scott, International Student', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'SysAdmin'
     st.switch_page('pages/20_Admin_Home.py')
+
+if st.button('Act as Jin Sakai, System Administrator', 
+            type = 'primary', 
+            use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'administrator'
+    st.session_state['first_name'] = 'SysAdmin'
+    st.switch_page('pages/20_Admin_Home.py')
+
+if st.button('Act as Kyrie Irving, Fourth-Year Student Applicant', 
+            type = 'primary', 
+            use_container_width=True):
+    st.session_state['authenticated'] = True
+    st.session_state['role'] = 'administrator'
+    st.session_state['first_name'] = 'SysAdmin'
+    st.switch_page('pages/20_Admin_Home.py')
+
+
 
 
 
