@@ -11,15 +11,15 @@ SideBarLinks()
 
 st.title('Welcome Thomas!')
 
-if st.button('Company Tracking', 
+if st.button('Add Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/50_Company_Tracking.py')
+  st.switch_page('pages/51_Add_Applications.py')
 
-if st.button('Jop Applications', 
+if st.button('Delete Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/54_Job_Applications.py')
+  st.switch_page('pages/52_Delete_Applications.py')
 
 if st.button('Visa Stats', 
              type='primary',
