@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 from backend.db_connection import db
 
-ticket_management = Blueprint('ticket_management', __name__)
+ticket_management = Blueprint('tickets', __name__)
 
 # ------------------------------------------------------------
 # Route to view all tickets or filter by status/priority
