@@ -79,7 +79,7 @@ def DeleteApplication():
 
 
 def SortApplication():
-    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Get Applications", icon="🔰")
+    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Sort Applications", icon="🔰")
 
 
 def GetApplication():
