@@ -49,11 +49,52 @@ def ClassificationNav():
 
 
 #### ------------------------ System Admin Role ------------------------
-def AdminPageNav():
-    st.sidebar.page_link("pages/20_Admin_Home.py", label="System Admin", icon="🖥️")
-    st.sidebar.page_link(
-        "pages/21_ML_Model_Mgmt.py", label="ML Model Management", icon="🏢"
-    )
+def AddApplication():
+    st.sidebar.page_link("pages/51_Add_Applications.py", label="System Admin", icon="🖥️")
+
+
+def DeleteApplication():
+    st.sidebar.page_link("pages/52_Delete_Applications.py", label="Test the API", icon="🛜")
+
+
+def SortApplication():
+    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Regression Prediction", icon="📈")
+
+
+
+
+
+
+
+
+
+
+
+
+## ------------------------ Examples for Role of usaid_worker ------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # --------------------------------Links Function -----------------------------------------------
@@ -79,9 +120,9 @@ def SideBarLinks(show_home=True):
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state["role"] == "regular_student":
-            PolStratAdvHomeNav()
-            WorldBankVizNav()
-            MapDemoNav()
+            AddApplication()
+            DeleteApplication()
+            SortApplication()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "usaid_worker":
