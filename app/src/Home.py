@@ -54,7 +54,6 @@ if st.button("Act as Joe Wellington, a regular Co-op seeker",
     st.session_state['first_name'] = 'Joe'
     # finally, we ask streamlit to switch to another page, in this case, the 
     # landing page for this particular user type
-    logger.info("Logging in as Political Strategy Advisor Persona")
     st.switch_page('pages/06_Joe_Home.py')
 
 if st.button('Act as Josh Brown, Data-Driven Applicant', 
