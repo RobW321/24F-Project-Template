@@ -148,6 +148,11 @@ def SideBarLinks(show_home=True):
             ReassignTicketNav()
             ViewTicketsNav()
 
+        if st.session_state["role"] == "experienced_student":
+            AddApplication()
+            DeleteApplication()
+            SortApplication()
+
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
 
