@@ -1,33 +1,35 @@
-from flask import Blueprint, request, jsonify, make_response, current_app
+from flask import Blueprint, jsonify, current_app
 from backend.db_connection import db
 
-student_applications = Blueprint('student_applications', __name__)
+applications = Blueprint('applications', __name__)
+@applications.route('/applications/<int:nuid>', methods=['GET'])
+def get_user_applications(nuid):
+    try:
+        # SQL query to fetch applications for the given NUID
+        query = f'''
+            SELECT 
+                a.ApplicationID,
+                a.DateSubmitted,
+                a.Status,
+                a.Priority,
+                a.Notes,
+                j.JobDescription,
+                c.CompanyName
+            FROM Application a
+            JOIN Job j ON a.JobID = j.JobID
+            JOIN Company c ON j.CompanyID = c.CompanyID
+            WHERE a.StudentNUID = {nuid}
+            ORDER BY a.DateSubmitted DESC
+        '''
+        # Execute query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        applications = cursor.fetchall()
 
-# ------------------------------------------------------------
-# User Story 1: Add a position to the list of applications
-@student_applications.route('/applications', methods=['POST'])
-def add_application():
-    data = request.json
-    current_app.logger.info(data)
+        current_app.logger.info(f"Applications fetched for NUID {nuid}: {applications}")
 
-    # Extract fields from request
-    student_id = data['student_id']
-    job_id = data['job_id']
-    date_submitted = data['date_submitted']
-    status = data['status']
-    priority = data['priority']
-    notes = data.get('notes', '')
+        return jsonify(applications), 200
 
-    query = f'''
-        INSERT INTO Application (DateSubmitted, Status, Priority, StudentNUID, JobID, Notes)
-        VALUES ('{date_submitted}', '{status}', {priority}, {student_id}, {job_id}, '{notes}')
-    '''
-    current_app.logger.info(query)
-
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    db.get_db().commit()
-
-    response = make_response("Application added successfully")
-    response.status_code = 201
-    return response
+    except Exception as e:
+        current_app.logger.error(f"Error fetching applications for NUID {nuid}: {e}")
+        return jsonify({"error": "Could not fetch applications"}), 500
