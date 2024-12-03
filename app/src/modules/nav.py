@@ -50,15 +50,15 @@ def ClassificationNav():
 
 #### ------------------------ System Admin Role ------------------------
 def AddApplication():
-    st.sidebar.page_link("pages/51_Add_Applications.py", label="System Admin", icon="🖥️")
+    st.sidebar.page_link("pages/51_Add_Applications.py", label="Add Applications", icon="🖥️")
 
 
 def DeleteApplication():
-    st.sidebar.page_link("pages/52_Delete_Applications.py", label="Test the API", icon="🛜")
+    st.sidebar.page_link("pages/52_Delete_Applications.py", label="Delete Applications", icon="🛜")
 
 
 def SortApplication():
-    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Regression Prediction", icon="📈")
+    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Get Applications", icon="📈")
 
 
 
