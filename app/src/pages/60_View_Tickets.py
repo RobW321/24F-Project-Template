@@ -13,7 +13,7 @@ SideBarLinks()
 st.header("Tickets")
 try:
     # Make GET request to fetch tickets
-    response = requests.get(API_URL, params=params)
+    response = requests.get('http://api:4000/tickets', params=params)
     response.raise_for_status()  # Raise error for bad status codes
     tickets = response.json()
     logger.info(f"Fetched tickets: {tickets}")
