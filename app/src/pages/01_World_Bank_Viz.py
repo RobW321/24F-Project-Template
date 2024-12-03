@@ -5,7 +5,7 @@ import streamlit as st
 
 st.title("Your Job Applications")
 
-API_URL = "http://web-api:4000/a/application"
+API_URL = "http://web-api:4000/a/Application"
 student_nuid = 1001
 
 
