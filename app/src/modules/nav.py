@@ -60,7 +60,19 @@ def ClassificationNav():
     )
 
 
-#### ------------------------ System Admin Role ------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+#### ------------------------ regular Student ------------------------
 def AddApplication():
     st.sidebar.page_link("pages/51_Add_Applications.py", label="Add Applications", icon="🟢")
 
@@ -70,7 +82,10 @@ def DeleteApplication():
 
 
 def SortApplication():
-    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Get Applications", icon="🖥️")
+    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Sort Applications", icon="🔰")
+
+def GetApplication():
+    st.sidebar.page_link("pages/54_Get_Applications.py", label="Get Applications", icon="📂")
 
 
 
@@ -130,11 +145,27 @@ def SideBarLinks(show_home=True):
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
 
+
+
+        
+
+
+
+
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state["role"] == "regular_student":
             AddApplication()
             DeleteApplication()
             SortApplication()
+            GetApplication()
+
+
+
+
+
+
+
+
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "usaid_worker":
