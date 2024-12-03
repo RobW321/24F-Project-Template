@@ -1,11 +1,11 @@
 from flask import Blueprint, request, jsonify, make_response, current_app
 from backend.db_connection import db
 
-ticket_management = Blueprint('ticket_management', __name__)
+tickets = Blueprint('tickets', __name__)
 
 # ------------------------------------------------------------
 # Route to view all tickets or filter by status/priority
-@ticket_management.route('/tickets', methods=['GET'])
+@tickets.route('/tickets', methods=['GET'])
 def view_tickets():
     status = request.args.get('status')
     priority = request.args.get('priority')
@@ -39,7 +39,7 @@ def view_tickets():
 
 # ------------------------------------------------------------
 # Route to reassign a ticket to a different employee
-@ticket_management.route('/tickets/<int:ticket_id>/reassign', methods=['PUT'])
+@tickets.route('/tickets/<int:ticket_id>/reassign', methods=['PUT'])
 def reassign_ticket(ticket_id):
     data = request.json
     new_employee_id = data['employee_id']
@@ -62,7 +62,7 @@ def reassign_ticket(ticket_id):
 
 # ------------------------------------------------------------
 # Route to edit a ticket's details
-@ticket_management.route('/tickets/<int:ticket_id>', methods=['PUT'])
+@tickets.route('/tickets/<int:ticket_id>', methods=['PUT'])
 def edit_ticket(ticket_id):
     data = request.json
     fields = []
