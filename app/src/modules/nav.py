@@ -4,6 +4,18 @@
 
 import streamlit as st
 
+#### ------------------------ Ticket Management ------------------------
+def EditTicketNav():
+    st.sidebar.page_link("pages/60_Edit_Ticket.py", label="Edit Ticket", icon="✏️")
+
+
+def ReassignTicketNav():
+    st.sidebar.page_link("pages/61_Reassign_Ticket.py", label="Reassign Ticket", icon="🔄")
+
+
+def ViewTicketsNav():
+    st.sidebar.page_link("pages/62_View_Tickets.py", label="View Tickets", icon="📋")
+
 
 #### ------------------------ General ------------------------
 def HomeNav():
