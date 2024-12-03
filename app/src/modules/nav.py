@@ -78,7 +78,7 @@ def SideBarLinks(show_home=True):
     if st.session_state["authenticated"]:
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "pol_strat_advisor":
+        if st.session_state["role"] == "regular_student":
             PolStratAdvHomeNav()
             WorldBankVizNav()
             MapDemoNav()
