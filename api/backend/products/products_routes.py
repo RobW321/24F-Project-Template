@@ -206,3 +206,5 @@ def update_product():
     current_app.logger.info(product_info)
 
     return "Success"
+
+# ------------------------------------------------------------

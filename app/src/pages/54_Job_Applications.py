@@ -21,6 +21,11 @@ if st.button('Delete Applications',
              use_container_width=True):
   st.switch_page('pages/52_Delete_Applications.py')
 
+if st.button('All Applications', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/92_All_Applications.py')
+
 if st.button('Visa Stats', 
              type='primary',
              use_container_width=True):
