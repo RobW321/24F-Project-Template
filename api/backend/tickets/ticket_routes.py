@@ -21,16 +21,21 @@ def view_tickets():
     if filters:
         query += ' WHERE ' + ' AND '.join(filters)
 
-    current_app.logger.info(query)
+    current_app.logger.info(f"Executing Query: {query}")
 
-    cursor = db.get_db().cursor()
-    cursor.execute(query)
-    tickets = cursor.fetchall()
+    try:
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        tickets = cursor.fetchall()
 
-    response = jsonify(tickets)
-    response.status_code = 200
-    return response
+        # Serialize tickets for JSON response
+        column_names = [desc[0] for desc in cursor.description]
+        tickets_serialized = [dict(zip(column_names, row)) for row in tickets]
 
+        return jsonify(tickets_serialized), 200
+    except Exception as e:
+        current_app.logger.error(f"Error fetching tickets: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
 
 # ------------------------------------------------------------
 # Route to reassign a ticket to a different employee

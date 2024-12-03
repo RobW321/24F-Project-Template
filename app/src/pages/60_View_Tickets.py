@@ -9,24 +9,6 @@ logger = logging.getLogger(__name__)
 # Call the SideBarLinks from the nav module in the modules directory
 SideBarLinks()
 
-# Set the header of the page
-st.title("View Tickets")
-
-# Backend API URL
-API_URL = "http://localhost:8501/tickets"  # Replace with your backend URL
-
-# Sidebar Filters
-st.sidebar.header("Filter Tickets")
-status_filter = st.sidebar.selectbox("Filter by Status", ["All", "Open", "In Progress", "Closed"], index=0)
-priority_filter = st.sidebar.selectbox("Filter by Priority", ["All", "1 (High)", "2 (Medium)", "3 (Low)"], index=0)
-
-# Query Parameters
-params = {}
-if status_filter != "All":
-    params["status"] = status_filter
-if priority_filter != "All":
-    params["priority"] = priority_filter.split()[0]  # Extract priority number
-
 # Fetch and display tickets
 st.header("Tickets")
 try:
@@ -34,6 +16,7 @@ try:
     response = requests.get(API_URL, params=params)
     response.raise_for_status()  # Raise error for bad status codes
     tickets = response.json()
+    logger.info(f"Fetched tickets: {tickets}")
 
     if tickets:
         for ticket in tickets:
@@ -47,5 +30,5 @@ try:
     else:
         st.info("No tickets match the selected filters.")
 except requests.exceptions.RequestException as e:
-    st.error("Failed to fetch tickets. Please try again later.")
+    st.error(f"Failed to fetch tickets: {e}")
     logger.error(f"Error fetching tickets: {e}")
