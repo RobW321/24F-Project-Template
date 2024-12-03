@@ -141,10 +141,10 @@ CREATE TABLE Interview (
 -- Student
 INSERT INTO Student (NUID, FirstName, LastName, VisaStatus, CountryOfOrigin)
 VALUES
-(1001, 'John', 'Doe', 'F1', 'USA'),
-(1002, 'Jane', 'Smith', 'H1B', 'India'),
-(1003, 'Alice', 'Johnson', 'F1', 'Canada'),
-(1004, 'Bob', 'Williams', 'L1', 'Mexico'),
+(1001, 'Joe', 'Wellington', 'F1', 'USA'),
+(1002, 'Josh', 'Brown', 'F1', 'USA'),
+(1003, 'Thomas', 'Scott', 'L1', 'Norway'),
+(1004, 'Kyrie', 'Irving', 'F1', 'USA'),
 (1005, 'Charlie', 'Brown', 'F1', 'Germany'),
 (1006, 'David', 'Davis', 'H1B', 'India'),
 (1007, 'Eva', 'Miller', 'F1', 'UK'),
