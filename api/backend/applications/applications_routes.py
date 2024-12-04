@@ -10,11 +10,9 @@ applications = Blueprint('applications', __name__)
 @applications.route('/applications', methods=['GET'])
 def get_user_applications():
         query = '''
-            SELECT 
-                ApplicationID,
-                StudentNUID,
-                Notes
+            SELECT *
             FROM Application
+            WHERE 
         '''
         # get a cursor object from the database
         cursor = db.get_db().cursor()
@@ -34,4 +32,7 @@ def get_user_applications():
         response.status_code = 200
     # send the response back to the client
         return response
+
+
+
 
