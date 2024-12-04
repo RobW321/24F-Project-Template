@@ -45,7 +45,7 @@ def MapDemoNav():
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
-    st.sidebar.page_link("pages/12_API_Test.py", label="Test the API", icon="🛜")
+    st.sidebar.page_link("pages/12_Add_Applications.py", label="Test the API", icon="🛜")
 
 
 def PredictionNav():

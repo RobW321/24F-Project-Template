@@ -32,4 +32,4 @@ if st.button(
     # Set the student_nuid value in session state
     st.session_state.student_nuid = 1003
     # Navigate to the page displaying applications
-    st.switch_page('pages/12_API_Test.py')
+    st.switch_page('pages/12_Add_Applications.py')
