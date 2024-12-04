@@ -1,11 +1,13 @@
 import requests
 import streamlit as st
+from modules.nav import SideBarLinks
+SideBarLinks()
 
 API_URL = "http://api:4000/a/applications"
 
 student_nuid = 1001
 
-st.title(f"Applications for User {student_nuid}")
+st.title(f"Your Applications:")
 
 # Fetch applications for the student
 try:
@@ -31,7 +33,6 @@ try:
         ]
 
         # Display applications as a table
-        st.write("### Applications List")
         st.table(data)
 
 except requests.exceptions.RequestException as e:
