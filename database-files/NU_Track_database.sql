@@ -1,5 +1,10 @@
-SHOW databases;
-USE "nutrack";
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP SCHEMA IF EXISTS nutrack ;
+CREATE SCHEMA IF NOT EXISTS nutrack DEFAULT CHARACTER SET latin1 ;
+USE nutrack ;
 
 
 
@@ -103,6 +108,12 @@ CREATE TABLE Application (
     FOREIGN KEY (JobID) REFERENCES Job(JobID)
 );
 
+/*CREATE TABLE IF NOT EXISTS `nutrack`.`applications` (
+  `ApplicationID` INT(11) PRIMARY KEY,
+  `DateSubmitted` VARCHAR(50) NULL DEFAULT NULL,
+  `Notes` VARCHAR(50) NULL DEFAULT NULL
+);*/
+
 
 CREATE TABLE Offers (
     OfferID INT PRIMARY KEY NOT NULL,
@@ -134,6 +145,7 @@ CREATE TABLE Interview (
     FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID),
     FOREIGN KEY (InterviewerID) REFERENCES Interviewer(InterviewerID)
 );
+
 
 
 -- Sample Data
@@ -305,7 +317,7 @@ INSERT INTO Employee (EmployeeID, FullName, EmailAddress, PhoneNumber, Role, Dep
 VALUES
 (1, 'Robert Brown', 'robert.brown@company.com', '555-1234', 'HR Manager', 1),
 (2, 'Lily Green', 'lily.green@company.com', '555-5678', 'Software Engineer', 2),
-(3, 'David Black', 'david.black@company.com', '555-9876', 'Marketing Specialist', 3)
+(3, 'David Black', 'david.black@company.com', '555-9876', 'Marketing Specialist', 3),
 (4, 'Laura White', 'laura.white@company.com', '555-1001', 'Marketing Manager', 4),
 (5, 'Robert Green', 'robert.green@company.com', '555-1002', 'Sales Director', 5),
 (6, 'Helen King', 'helen.king@company.com', '555-1003', 'Operations Supervisor', 6),
@@ -835,5 +847,9 @@ VALUES
 (48, '2025-02-27', 'Houston Office', 'Behavioral', '2nd Round', 48, 48),
 (49, '2025-03-01', 'Seattle Office', 'Technical', 'Final Round', 49, 49),
 (50, '2025-03-03', 'Denver Office', 'Behavioral', '1st Round', 50, 50);
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
