@@ -6,35 +6,28 @@ from flask import current_app
 from backend.db_connection import db
 
 applications = Blueprint('applications', __name__)
+@applications.route('/applications/<StudentNUID>', methods=['GET'])
+def get_user_applications(StudentNUID):
+    current_app.logger.info('get /applications/<StudentNUID> route')
+    cursor = db.get_db().cursor()
 
-@applications.route('/applications', methods=['GET'])
-def get_user_applications():
-        query = '''
+    query = '''
             SELECT 
-                ApplicationID,
-                StudentNUID,
-                Notes
-            FROM Application
-        '''
-        # get a cursor object from the database
-        cursor = db.get_db().cursor()
+            a.ApplicationID,
+            a.DateSubmitted,
+            a.Status,
+            a.Priority,
+            a.Notes,
+            j.JobDescription,
+            c.CompanyName
+            FROM Application a
+            JOIN Job j ON a.JobID = j.JobID
+            JOIN Company c ON j.CompanyID = c.CompanyID
+            WHERE a.StudentNUID = {0}'''.format(StudentNUID)
 
-    # use cursor to query the database for a list of products
-        cursor.execute(query)
+    cursor.execute(query)
+    theData = cursor.fetchall()
 
-    # fetch all the data from the cursor
-    # The cursor will return the data as a 
-    # Python Dictionary
-        theData = cursor.fetchall()
-
-    # Create a HTTP Response object and add results of the query to it
-    # after "jasonify"-ing it.
-        response = make_response(jsonify(theData))
-    # set the proper HTTP Status code of 200 (meaning all good)
-        response.status_code = 200
-    # send the response back to the client
-        return response
-
-
-
-
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
