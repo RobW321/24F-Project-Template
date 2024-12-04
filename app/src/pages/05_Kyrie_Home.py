@@ -17,7 +17,7 @@ st.write('### What would you like to do today?')
 if st.button('View Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_API_Test.py')
+  st.switch_page('pages/15_Kyrie_Get_Apps.py')
 
 if st.button('View World Map Demo', 
              type='primary',
