@@ -21,10 +21,18 @@ if st.button('Delete Applications',
              use_container_width=True):
   st.switch_page('pages/52_Delete_Applications.py')
 
-if st.button('All Applications', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/92_Thomas_All_Applications.py')
+if "student_nuid" not in st.session_state:
+    st.session_state.student_nuid = None
+    
+if st.button(
+    'View Applications',
+    type='primary',
+    use_container_width=True
+):
+    # Set the student_nuid value in session state
+    st.session_state.student_nuid = 1003
+    # Navigate to the page displaying applications
+    st.switch_page('pages/12_API_Test.py')
 
 if st.button('Visa Stats', 
              type='primary',

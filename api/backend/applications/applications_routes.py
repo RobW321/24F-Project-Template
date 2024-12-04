@@ -28,6 +28,7 @@ def get_user_applications(StudentNUID):
             JOIN Job j ON a.JobID = j.JobID
             JOIN Company c ON j.CompanyID = c.CompanyID
             WHERE a.StudentNUID = {0}'''.format(StudentNUID)
+    
    
 
         # Execute query
