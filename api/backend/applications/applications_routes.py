@@ -31,4 +31,3 @@ def get_user_applications(StudentNUID):
     the_response = make_response(jsonify(theData))
     the_response.status_code = 200
     return the_response
->>>>>>> faf508f1f2ea60766863095b03f3da60a8efaffd

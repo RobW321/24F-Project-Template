@@ -31,4 +31,3 @@ try:
 except requests.exceptions.RequestException as e:
     st.error("Failed to fetch applications. Please try again later.")
     st.error(e)
->>>>>>> faf508f1f2ea60766863095b03f3da60a8efaffd
