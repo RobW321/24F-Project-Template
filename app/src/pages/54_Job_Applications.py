@@ -33,8 +33,3 @@ if st.button(
     st.session_state.student_nuid = 1003
     # Navigate to the page displaying applications
     st.switch_page('pages/12_API_Test.py')
-
-if st.button('Visa Stats', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/91_Visa_Stats.py')
