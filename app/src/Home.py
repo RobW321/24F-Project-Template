@@ -62,7 +62,7 @@ if st.button('Act as Josh Brown, Data-Driven Applicant',
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
     st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/06_Josh_Home.py')
+    st.switch_page('pages/07_Josh_Home.py')
 
 if st.button('Act as Thomas Scott, International Student', 
             type = 'primary', 
