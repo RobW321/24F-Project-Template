@@ -56,13 +56,15 @@ if st.button("Act as Joe Wellington, a regular Co-op seeker",
     # landing page for this particular user type
     st.switch_page('pages/06_Joe_Home.py')
 
+    nuid = 1001
+
 if st.button('Act as Josh Brown, Data-Driven Applicant', 
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
     st.session_state['role'] = 'usaid_worker'
     st.session_state['first_name'] = 'Mohammad'
-    st.switch_page('pages/07_Josh_Home.py')
+    st.switch_page('pages/06_Josh_Home.py')
 
 if st.button('Act as Thomas Scott, International Student', 
             type = 'primary', 

@@ -12,14 +12,7 @@ tickets = Blueprint('tickets', __name__)
 # and return them to the client
 def get_tickets():
     query = '''
-        SELECT 
-            TicketID,
-            Description,
-            Status,
-            Priority,
-            TicketType,
-            EmployeeID,
-            StudentNUID,
+        SELECT *
         FROM Ticket
     '''
     
