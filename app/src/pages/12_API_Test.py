@@ -1,25 +1,33 @@
-import logging
-logger = logging.getLogger(__name__)
-import streamlit as st
 import requests
-from streamlit_extras.app_logo import add_logo
-from modules.nav import SideBarLinks
+import streamlit as st
 
-SideBarLinks()
+API_URL = "http://api:4000/a/applications"
 
-st.write("# Accessing a REST API from Within Streamlit")
+student_nuid = 1001
 
-"""
-Simply retrieving data from a REST api running in a separate Docker Container.
+st.title(f"Applications for User {student_nuid}")
 
-If the container isn't running, this will be very unhappy.  But the Streamlit app 
-should not totally die. 
-"""
-data = {} 
+# Fetch applications for the student
 try:
-  data = requests.get('http://api:4000/a/applications').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+  response = requests.get(f"{API_URL}/{student_nuid}")
+  response.raise_for_status()
+  applications = response.json()
 
-st.dataframe(data)
+  if not applications:
+    st.write("No applications found.")
+  else:
+    st.write("### Applications List")
+    for app in applications:
+      st.markdown(f"""
+      **Application ID**: {app['ApplicationID']}
+      **Date Submitted**: {app['DateSubmitted']}
+      **Status**: {app['Status']}
+      **Priority**: {app['Priority']}
+      **Job**: {app['JobDescription']}
+      **Company**: {app['CompanyName']}
+      **Notes**: {app['Notes']}
+      ---
+          """)
+except requests.exceptions.RequestException as e:
+    st.error("Failed to fetch applications. Please try again later.")
+    st.error(e)
