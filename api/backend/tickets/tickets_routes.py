@@ -12,7 +12,8 @@ tickets = Blueprint('tickets', __name__)
 # and return them to the client
 def get_tickets():
     query = '''
-        SELECT *
+        SELECT 
+            *
         FROM Ticket
     '''
     
