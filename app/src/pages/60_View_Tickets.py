@@ -1,38 +1,28 @@
 import logging
-import requests
+logger = logging.getLogger(__name__)
 import streamlit as st
+import requests
+from streamlit_extras.app_logo import add_logo
 from modules.nav import SideBarLinks
 
-# Setup logger
-logger = logging.getLogger(__name__)
-
-# Add sidebar links
 SideBarLinks()
 
-st.write("# View Tickets")
+st.write("# Accessing a REST API from Within Streamlit")
 
 """
-Retrieve and display ticket data from the REST API. If the backend isn't running,
-the app will display a message and fallback to dummy data.
+Simply retrieving data from a REST api running in a separate Docker Container.
 
-Use the filters in the sidebar to refine your results.
+If the container isn't running, this will be very unhappy.  But the Streamlit app 
+should not totally die. 
 """
-
-# Define Backend API URL
-API_URL = "http://api:4000/tickets"  # Replace with the actual backend URL
-
-# Sidebar Filters
-st.sidebar.header("Filter Tickets")
-status_filter = st.sidebar.selectbox("Filter by Status", ["All", "Open", "In Progress", "Closed"], index=0)
-priority_filter = st.sidebar.selectbox("Filter by Priority", ["All", "1 (High)", "2 (Medium)", "3 (Low)"], index=0)
-
 data = {} 
 try:
-  data = requests.get('http://api:4000/tickets').json()
+  data = requests.get('http://api:4000/t/tickets').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
 
 st.dataframe(data)
+
 
 
