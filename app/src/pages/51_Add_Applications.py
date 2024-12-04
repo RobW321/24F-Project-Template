@@ -2,39 +2,40 @@ import requests
 import streamlit as st
 
 # Backend API URL
-API_URL = "http://localhost:5000/applications"
+API_URL = "http://api:4000/a/applications"
 
-st.title("Add a Job Application")
+st.title("Add New Job Application")
 
-# Form to collect application details
-with st.form("application_form"):
-    student_id = st.number_input("Student ID", min_value=1, step=1)
+# Input fields for application details
+with st.form("Add Application Form"):
+    student_nuid = value=1001  # Default NUID for Joe Wellington
     job_id = st.number_input("Job ID", min_value=1, step=1)
     date_submitted = st.date_input("Date Submitted")
-    status = st.selectbox("Application Status", ["Submitted", "In Progress", "Accepted", "Rejected"])
-    priority = st.selectbox("Priority Level", [1, 2, 3], help="1 = High, 3 = Low")
+    status = st.selectbox("Application Status", ["In Progress", "Accepted", "Rejected"])
+    priority = st.number_input("Priority (1-3)", min_value=1, max_value=3, step=1)
     notes = st.text_area("Notes (Optional)")
 
     # Submit button
-    submitted = st.form_submit_button("Add Application")
+    submitted = st.form_submit_button("Submit Application")
 
+# Handle form submission
 if submitted:
-    # Payload for POST request
-    payload = {
-        "student_id": student_id,
-        "job_id": job_id,
-        "date_submitted": date_submitted.strftime("%Y-%m-%d"),
-        "status": status,
-        "priority": priority,
-        "notes": notes,
-    }
-
     try:
+        # Prepare data for POST request
+        application_data = {
+            "StudentNUID": student_nuid,
+            "JobID": job_id,
+            "DateSubmitted": date_submitted.strftime('%Y-%m-%d'),
+            "Status": status,
+            "Priority": priority,
+            "Notes": notes,
+        }
+
         # Send POST request to backend
-        response = requests.post(API_URL, json=payload)
+        response = requests.post(API_URL, json=application_data)
         response.raise_for_status()
+
         st.success("Application added successfully!")
-        st.json(response.json())  # Display response data
 
     except requests.exceptions.RequestException as e:
         st.error("Failed to add application. Please try again.")

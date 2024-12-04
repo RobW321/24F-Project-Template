@@ -19,7 +19,7 @@ if st.button('View Applications',
              use_container_width=True):
   st.switch_page('pages/12_API_Test.py')
 
-if st.button('View World Map Demo', 
+if st.button('Add An Application', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/51_Add_Applications.py')
