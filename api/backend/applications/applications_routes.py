@@ -10,9 +10,11 @@ applications = Blueprint('applications', __name__)
 @applications.route('/applications', methods=['GET'])
 def get_user_applications():
         query = '''
-            SELECT *
+            SELECT 
+                ApplicationID,
+                StudentNUID,
+                Notes
             FROM Application
-            WHERE 
         '''
         # get a cursor object from the database
         cursor = db.get_db().cursor()
