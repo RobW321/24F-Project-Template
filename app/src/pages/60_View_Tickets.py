@@ -7,13 +7,10 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.write("# Accessing a REST API from Within Streamlit")
+st.title("Viewing all Active Tickets")
 
 """
-Simply retrieving data from a REST api running in a separate Docker Container.
-
-If the container isn't running, this will be very unhappy.  But the Streamlit app 
-should not totally die. 
+Viewing all the tickets for all employees that are currenly open or recently close!
 """
 data = {} 
 try:
