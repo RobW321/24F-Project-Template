@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+from modules.nav import SideBarLinks
+
+SideBarLinks()
 
 # Set the API endpoint
 API_URL = "http://api:4000/t/add"  # Update with the actual API URL
