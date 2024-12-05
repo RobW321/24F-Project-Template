@@ -155,6 +155,45 @@ def delete_application(ApplicationID):
     except Exception as e:
         current_app.logger.error(f"Error deleting application: {e}")
         return jsonify({"error": "Failed to delete application"}), 500
+    
+@applications.route('/applications/priority/<int:priority>', methods=['GET'])
+def get_applications_by_priority(priority):
+    """
+    Fetches all applications with the specified priority level.
+    """
+    try:
+        # SQL query to fetch applications by priority
+        query = f'''
+            SELECT 
+                a.ApplicationID,
+                a.DateSubmitted,
+                a.Status,
+                a.Priority,
+                a.Notes,
+                j.JobDescription,
+                c.CompanyName
+            FROM Application a
+            JOIN Job j ON a.JobID = j.JobID
+            JOIN Company c ON j.CompanyID = c.CompanyID
+            WHERE a.Priority = {priority}
+        '''
+        
+        # Log the query for debugging
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        theData = cursor.fetchall()
+
+        # Return the data
+        response = make_response(jsonify(theData))
+        response.status_code = 200
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error fetching applications by priority: {e}")
+        return jsonify({"error": "Failed to fetch applications"}), 500
 
     
     

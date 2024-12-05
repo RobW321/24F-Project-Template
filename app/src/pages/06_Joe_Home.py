@@ -53,3 +53,14 @@ if st.button(
     st.session_state.student_nuid = 1001
     # Navigate to the page displaying applications
     st.switch_page('pages/12_Delete_Application.py')
+    
+if st.button(
+    'Filter Applications by Priority',
+    type='primary',
+    use_container_width=True
+):
+    # Set the student_nuid value in session state
+    st.session_state.student_nuid = 1001
+    # Navigate to the page displaying applications
+    st.switch_page('pages/12_Filter_Application.py')
+
