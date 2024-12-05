@@ -74,10 +74,23 @@ st.markdown('<div class="title">Welcome to the Application Dashboard!</div>', un
 # Add the page subtitle
 st.markdown('<div class="subtitle">Manage your applications with ease using the tools below.</div>', unsafe_allow_html=True)
 
+if st.button(
+    'View Applications',
+    type='primary',
+    use_container_width=True
+):
+    # Navigate to the page displaying applications
+    st.switch_page('pages/12_Get_Applications.py')
+
 if st.button('Add Applications', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/12_Add_Applications.py')
+
+if st.button('Edit Applications', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/12_Update_Application.py')
 
 if st.button('Delete Applications', 
              type='primary',
@@ -88,13 +101,6 @@ if st.button('Delete Applications',
 if "student_nuid" not in st.session_state:
     st.session_state.student_nuid = None
     
-if st.button(
-    'View Applications',
-    type='primary',
-    use_container_width=True
-):
-    # Navigate to the page displaying applications
-    st.switch_page('pages/12_Get_Applications.py')
 
 if st.button(
     'Filter Applications by Priority',
