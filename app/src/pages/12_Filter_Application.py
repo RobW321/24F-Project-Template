@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
+from modules.nav import SideBarLinks
 import pandas as pd
+
+SideBarLinks()
 
 # Backend API URL
 API_URL = "http://api:4000/a/applications"
