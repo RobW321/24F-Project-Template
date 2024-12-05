@@ -35,3 +35,9 @@ if st.button('Visa Stats',
              use_container_width=True):
     st.session_state.student_nuid = 1003  # Set the NUID to 1003
     st.switch_page('pages/91_Visa_Stats.py')
+
+if st.button('View Sankey Diagram', 
+             type='primary',
+             use_container_width=True):
+      st.session_state.student_nuid = 1003  
+      st.switch_page('pages/07_Sankey.py')

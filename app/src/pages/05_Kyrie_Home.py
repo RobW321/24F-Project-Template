@@ -14,8 +14,6 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if "student_nuid" not in st.session_state:
-    st.session_state.student_nuid = None
 
 # Button to navigate to "Job Applications"
 if st.button('Job Applications', 
@@ -27,5 +25,11 @@ if st.button('Job Applications',
 if st.button('Interviews', 
              type='primary',
              use_container_width=True):
+  st.session_state.student_nuid = 1004 # Set the NUID to 1003
   st.switch_page('pages/17_Kyrie_Interviews.py')
 
+if st.button('View Sankey Diagram', 
+             type='primary',
+             use_container_width=True):
+    st.session_state.student_nuid = 1004  
+    st.switch_page('pages/07_Sankey.py')
