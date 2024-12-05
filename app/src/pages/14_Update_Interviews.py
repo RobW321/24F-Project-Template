@@ -14,10 +14,8 @@ st.write("Fill out the form below to update an interview.")
 # Form to get user inputs
 with st.form("update_interview_form"):
     interview_id = st.number_input("Interview ID (e.g., 1):", min_value=1, step=1, format="%d")
-    interview_type = st.selectbox("Interview Type:", ["Technical", "HR", "Managerial", "On-site", "Remote"])
-    round_ = st.selectbox("Round:", ["Round 1", "Round 2", "Final"])
-    company_id = st.number_input("Company ID (e.g., 1):", min_value=1, step=1)
-    interviewer_id = st.number_input("Interviewer ID (e.g., 2):", min_value=1, step=1)
+    interview_type = st.selectbox("Interview Type:", ["Technical", "Behavioral"])
+    round = st.selectbox("Round:", ["Round 1", "Round 2", "Final"])
     interview_date = st.date_input("Interview Date:", value=date.today())
     location = st.text_input("Location (Optional):")
 
@@ -29,11 +27,9 @@ if submitted:
     # Prepare the payload
     payload = {
         "InterviewType": interview_type,
-        "Round": round_,
-        "CompanyID": company_id,
-        "InterviewerID": interviewer_id,
-        "Date": interview_date.isoformat(),
-        "Location": location,
+        "Round": round,
+        "Dates": interview_date.isoformat(),
+        "Locations": location,
     }
 
     try:

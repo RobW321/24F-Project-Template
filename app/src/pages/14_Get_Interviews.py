@@ -24,6 +24,8 @@ if "student_nuid" in st.session_state and st.session_state.student_nuid is not N
             data = [
                 {
                     "Interview ID": interview.get("InterviewID", "N/A"),
+                    "Date": interview.get("Dates", "N/A"),
+                    "Location": interview.get("Locations", "N/A"),
                     "Interview Type": interview.get("InterviewType", "N/A"),
                     "Round": interview.get("Round", "N/A"),
                     "Company": interview.get("CompanyName", "N/A"),

@@ -24,17 +24,24 @@ if st.button(
 if st.button('Add Interviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_Add_Applications.py')
+  st.session_state.student_nuid = 1004
+  st.switch_page('pages/14_Add_Interviews.py')
 
 if st.button('Edit Interviews', 
              type='primary',
              use_container_width=True):
+  st.session_state.student_nuid = 1004
   st.switch_page('pages/14_Update_Interviews.py')
 
 if st.button('Delete Interviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/52_Delete_Applications.py')
+  st.switch_page('pages/14_Delete_Interviews.py')
+
+if st.button('Filter Interviews By Round', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/14_Delete_Interviews.py')
 
 if "student_nuid" not in st.session_state:
     st.session_state.student_nuid = None

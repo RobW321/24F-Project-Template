@@ -84,7 +84,9 @@ CREATE TABLE Company (
     Location VARCHAR(100),
     SponsorID INT NOT NULL,
     SponsorshipHistory VARCHAR(100),
-    FOREIGN KEY (SponsorID) REFERENCES VisaSponsor(SponsorID)
+    FOREIGN KEY (SponsorID) REFERENCES VisaSponsor(SponsorID) 
+    ON UPDATE CASCADE 
+    ON DELETE CASCADE
 );
 
 CREATE TABLE Job (
@@ -131,7 +133,6 @@ CREATE TABLE Interviewer (
     LastName VARCHAR(50) NOT NULL,
     Email VARCHAR(100) NOT NULL,
     Role VARCHAR(50) NOT NULL
-
 );
 
 CREATE TABLE Interview (

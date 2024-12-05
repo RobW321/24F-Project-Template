@@ -13,10 +13,11 @@ def get_interviews(StudentNUID):
     query = '''
             SELECT 
                 I.InterviewID,
+                I.Dates,
+                I.Locations,
                 I.InterviewType,
                 I.Round,
                 C.CompanyName,
-                C.Location AS CompanyLocation,
                 CONCAT(IV.FirstName, ' ', IV.LastName) AS InterviewerName,
                 IV.Email AS InterviewerEmail
             FROM 
@@ -39,53 +40,111 @@ def get_interviews(StudentNUID):
     return the_response
 
 
-@interviews.route('/interviews/<int:InterviewID>', methods=['PUT'])
+@interviews.route('/interviews/<InterviewID>', methods=['PUT'])
 def update_interview(InterviewID):
-    current_app.logger.info('PUT /interviews/<InterviewID> route')
-
-    # Get data from the request body
-    data = request.get_json()
-
-    # Extract the details for the interview that need to be updated
-    interview_type = data.get('InterviewType')
-    round_ = data.get('Round')
-    company_id = data.get('CompanyID')
-    interviewer_id = data.get('InterviewerID')
-    date = data.get('Date')
-    location = data.get('Location')
-
-    if not all([interview_type, round_, company_id, interviewer_id, date]):
-        return make_response(jsonify({"error": "Missing required fields"}), 400)
-
-    # Create the update query
-    query = '''
-        UPDATE Interview
-        SET InterviewType = %s,
-            Round = %s,
-            CompanyID = %s,
-            InterviewerID = %s,
-            Dates = %s,
-            Locations = %s
-        WHERE InterviewID = %s
-    '''
-    
     try:
+        data = request.json
+        current_app.logger.info(data)
+
+        # Extract the details for the interview that need to be updated
+        interview_type = data.get('InterviewType')
+        round = data.get('Round')
+        interview_date = data.get('Dates')
+        location = data.get('Locations')
+
+        # Create the update query
+        query = f'''
+            UPDATE Interview
+            SET 
+                InterviewType = '{interview_type}',
+                Round = '{round}',
+                Dates = '{interview_date}',
+                Locations = '{location}'
+            WHERE InterviewID = '{InterviewID}'
+        '''
+    
+    
         # Execute the update query
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute and commit the query
         cursor = db.get_db().cursor()
-        cursor.execute(query, (interview_type, round_, company_id, interviewer_id, date, location, InterviewID))
+        cursor.execute(query)
         db.get_db().commit()
 
-        # Check if any row was updated
-        if cursor.rowcount == 0:
-            return make_response(jsonify({"error": "Interview not found"}), 404)
-
-        return make_response(jsonify({"message": "Interview updated successfully"}), 200)
+        # Return a success response
+        response = make_response(jsonify({"message": "Interview updated successfully"}))
+        response.status_code = 200
+        return response
 
     except Exception as e:
         current_app.logger.error(f"Error updating interview: {e}")
         return make_response(jsonify({"error": "Internal server error"}), 500)
 
 
+@interviews.route('/interviews', methods=['POST'])
+def add_interview():
+    try:
+        data = request.json
+        current_app.logger.info(data)
 
+        # Extract interview details from the request
+        interview_id = data['InterviewID']
+        interview_date = data['Dates']
+        location = data['Locations']
+        interview_type = data['InterviewType']
+        round = data['Round']
+        company_id = data['CompanyID']
+        interviewer_id = data['InterviewerID']
+
+        # SQL Insert query
+        query = f'''
+            INSERT INTO Interview (InterviewID, Dates, Locations, InterviewType, Round, CompanyID, InterviewerID)
+            VALUES ({interview_id}, '{interview_date}', '{location}', '{interview_type}', '{round}', {company_id}, {interviewer_id}) 
+        '''
+
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute the insert query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        db.get_db().commit()
+
+        # Return a success response
+        response = make_response(jsonify({"message": "Interview added successfully!"}))
+        response.status_code = 201
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error adding interview: {e}")
+        return make_response(jsonify({"error": "Internal server error"}), 500)
+    
+
+@interviews.route('/delete/<interview_id>', methods=['DELETE'])
+def delete_interview(interview_id):
+    try:
+        # SQL query to delete the interview from the database
+        query = '''
+            DELETE FROM Interview
+            WHERE InterviewID = %s
+        '''
+
+        current_app.logger.info(f"Executing query: {query}")
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (interview_id,))
+        db.get_db().commit()
+
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Interview not found"}), 404
+        
+        # Return success response
+        response = make_response(jsonify({"message": "Interview deleted successfully"}))
+        response.status_code = 200
+        return response
+    
+    except Exception as e:
+        current_app.logger.error(f"Error deleting interview with ID {interview_id}: {e}")
+        return make_response(jsonify({"error": "Internal server error"}), 500)
 
 
