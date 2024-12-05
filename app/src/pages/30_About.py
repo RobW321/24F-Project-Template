@@ -9,7 +9,7 @@ AboutPage()
 st.session_state["on_about_page"] = True
 
 # Page title
-st.title("About NUTracks")
+st.title("About NUTrack")
 
 # Section 1: Introduction
 st.header("Introduction")
@@ -20,10 +20,10 @@ st.markdown(
 )
 
 # Section 2: Purpose of NUTracks
-st.header("Why NUTracks?")
+st.header("Why NUTrack?")
 st.markdown(
     """
-    **NUTracks** is a data-driven job application tracker tailored specifically for co-op searches. It allows students to:
+    **NUTrack** is a data-driven job application tracker tailored specifically for co-op searches. It allows students to:
     - Organize, filter, and prioritize applications with ease.
     - Track their application statuses and success rates.
     - Gain insights into response times, interview stages, and compensation trends.
@@ -31,7 +31,7 @@ st.markdown(
 )
 
 # Section 3: Unique Features
-st.header("What Makes NUTracks Different?")
+st.header("What Makes NUTrack Different?")
 st.markdown(
     """
     Unlike traditional solutions, NUTracks focuses on addressing the lack of guidance and transparency in the co-op search process. Key features include:
