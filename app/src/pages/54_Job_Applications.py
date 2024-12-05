@@ -14,7 +14,7 @@ st.title('Welcome Thomas!')
 if st.button('Add Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_Get_Applications.py')
+  st.switch_page('pages/92_Add_Applications.py')
 
 if st.button('Delete Applications', 
              type='primary',

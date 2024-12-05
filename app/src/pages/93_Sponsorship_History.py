@@ -7,14 +7,14 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.title("Viewing all Active Tickets")
+st.title("Viewing Sponsorship History")
 
 """
-Viewing all the tickets for all employees that are currenly open or recently close!
+Viewing the Sponsorship History for All Companies with Applications
 """
 data = {} 
 try:
-  data = requests.get('http://api:4000/t/tickets').json()
+  data = requests.get('http://api:4000/co/companies').json()
 except:
   st.write("**Important**: Could not connect to sample api, so using dummy data.")
   data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}

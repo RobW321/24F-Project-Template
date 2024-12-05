@@ -1,18 +1,21 @@
 from flask import Blueprint
+from flask import request
 from flask import jsonify
 from flask import make_response
+from flask import current_app
 from backend.db_connection import db
 
-tickets = Blueprint('companies', __name__)
+companies = Blueprint('companies', __name__)
 
 # ------------------------------------------------------------
 # Route to view all tickets or filter by status/priority
-@tickets.route('/companies', methods=['GET'])
+@companies.route('/companies', methods=['GET'])
 # Get all the products from the database, package them up,
 # and return them to the client
 def get_tickets():
     query = '''
-        SELECT *
+        SELECT CompanyName,
+        SponsorshipHistory
         FROM Company
     '''
     
@@ -34,5 +37,4 @@ def get_tickets():
     response.status_code = 200
     # send the response back to the client
     return response
-
 
