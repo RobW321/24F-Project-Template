@@ -122,7 +122,6 @@ def add_application():
         return jsonify({"error": "Failed to add application"}), 500 
     
 
-applications = Blueprint('applications', __name__)
 
 @applications.route('/applications/<ApplicationID>', methods=['DELETE'])
 def delete_application(ApplicationID):
