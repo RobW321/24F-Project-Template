@@ -72,7 +72,3 @@ st.markdown(
     - **Rohan Batra** ([StubblySeeker](https://github.com/StubblySeeker))
     """
 )
-
-if st.button("Back to Home"):
-    st.session_state["on_about_page"] = False  # Reset the flag when leaving the About page
-    st.switch_page("Home.py")
