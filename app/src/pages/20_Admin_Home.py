@@ -31,3 +31,8 @@ if st.button('Delete Companies',
             type='primary',
             use_container_width=True):
   st.switch_page('pages/95_Company_Delete.py')
+
+if st.button('View Jobs', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/63_Jobs.py')
