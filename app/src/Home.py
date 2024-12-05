@@ -70,7 +70,7 @@ if st.button('Act as Thomas Scott, International Student',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
+    st.session_state['role'] = 'regular_student'
     st.session_state['first_name'] = 'Thomas'
     st.switch_page('pages/09_Thomas_Home.py')
 

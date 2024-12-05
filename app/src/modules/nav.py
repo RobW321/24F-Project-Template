@@ -141,8 +141,6 @@ def SideBarLinks(show_home=True):
 
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
-        if st.session_state["role"] == "regular_student":
-            PredictionNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "usaid_worker":

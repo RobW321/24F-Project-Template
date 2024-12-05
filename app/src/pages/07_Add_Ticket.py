@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 
 # Set the API endpoint
-API_URL = "http://api:4000/a/tickets"  # Update with the actual API URL
+API_URL = "http://api:4000/t/add"  # Update with the actual API URL
 
 # Streamlit form for ticket input
 st.title("Add a New Ticket")
