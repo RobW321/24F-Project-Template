@@ -1,25 +1,46 @@
-import logging
-logger = logging.getLogger(__name__)
 import streamlit as st
 import requests
-from streamlit_extras.app_logo import add_logo
-from modules.nav import SideBarLinks
+from datetime import date
 
-SideBarLinks()
+# Backend API URL
+API_URL = "http://api:4000/co/edit"
 
-st.title("Viewing all Companies")
+# Streamlit Page Setup
+st.title("Update an Existing Company Application")
 
-"""
-Viewing all the companies.
-"""
-data = {} 
-try:
-  data = requests.get('http://api:4000/co/companies').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+# Instruction
+st.write("Fill out the form below to update an company.")
 
-st.dataframe(data)
+# Form to get user inputs
+with st.form("update_company_form"):
+    company_id = st.number_input("Company ID (e.g., 1):", min_value=1, step=1, format="%d")
+    company_name = st.text_area("Company Name:")
+    industry = st.text_area("Industry:")
+    location = st.text_area("Location:")
 
+    # Submit button for the form
+    submitted = st.form_submit_button("Update Company")
 
+# If the form is submitted
+if submitted:
+    # Prepare the payload
+    payload = {
+        "CompanyID": company_id,
+        "CompanyName": company_name,
+        "Industry": industry,
+        "Location": location,
+    }
 
+    try:
+        # Send the payload to the backend API
+        response = requests.put(f"{API_URL}", json=payload)
+        response.raise_for_status()
+
+        # Success message
+        st.success("Company updated successfully!")
+        st.json(payload)
+
+    except requests.exceptions.RequestException as e:
+        # Error message
+        st.error("Failed to update company. Please try again.")
+        st.error(e)

@@ -3,7 +3,7 @@ import requests
 from datetime import date
 
 # Backend API URL
-API_URL = "http://api:4000/co/company"
+API_URL = "http://api:4000/co/add"
 
 # Streamlit Page Setup
 st.title("Add a New Company")
@@ -17,6 +17,7 @@ with st.form("add_company"):
     company_name = st.text_area("Company Name:",)
     industry = st.text_area("Industry:",)
     location = st.text_area("Location:")
+    sponsor_id = st.number_input("SponsorID (e.g., 1):", min_value=1, step=1, format="%d")
 
 
     # Submit button for the form
@@ -30,6 +31,7 @@ if submitted:
         "CompanyName": company_name,
         "Industry": industry,
         "Location": location,
+        "SponsorID": sponsor_id,
     }
 
     try:

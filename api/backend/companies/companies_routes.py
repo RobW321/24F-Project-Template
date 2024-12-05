@@ -103,7 +103,7 @@ def delete_specific_tickets():
     return response
     
 
-@companies.route('/companies', methods=['POST'])
+@companies.route('/add', methods=['POST'])
 def add_company():
     try:
         # Collect data from the request
@@ -111,16 +111,16 @@ def add_company():
         current_app.logger.info(the_data)
 
         # Extract variables from request
-        company_id = the_data['StudentNUID']
+        company_id = the_data['CompanyID']
         company_name = the_data['CompanyName']
-        industry = the_data['Industry']
         sponsor_id = the_data['SponsorID']
+        industry = the_data['Industry']
         location = the_data['Location']
 
-        # SQL query to insert the new application into the database
-        query = f'''
-            INSERT INTO Company (CompanyID, JobID, DateSubmitted, Status, Priority, Notes)
-            VALUES ({company_id}, {company_name}, '{industry}', '{sponsor_id}', {location})
+        # SQL query with placeholders
+        query = '''
+            INSERT INTO Company (CompanyID, CompanyName, Industry, Location, SponsorID)
+            VALUES (%s, %s, %s, %s, %s)
         '''
 
         # Log query for debugging
@@ -128,7 +128,7 @@ def add_company():
 
         # Execute and commit the query
         cursor = db.get_db().cursor()
-        cursor.execute(query)
+        cursor.execute(query, (company_id, company_name, industry, location, sponsor_id))
         db.get_db().commit()
 
         # Return a success response
@@ -138,38 +138,38 @@ def add_company():
 
     except Exception as e:
         current_app.logger.error(f"Error adding Company: {e}")
-        return jsonify({"error": "Failed to add company"}), 500 
+        return jsonify({"error": "Failed to add company"}), 500
     
 
-@companies.route('/companies/<CompanyID>', methods=['PUT'])
-def update_company(CompanyID):
+@companies.route('/edit', methods=['PUT'])
+def update_company():
     try:
         # Collect data from the request
         the_data = request.json
         current_app.logger.info(the_data)
 
-        # Extract variables from request
-        company_name = the_data.get('CompanyName')
-        industry = the_data.get('Industry')
-        location = the_data.get('Location')
-        notes = the_data.get('Notes')
+        # Extract variables from the request
+        company_name = the_data['CompanyName']
+        industry = the_data['Industry']
+        location = the_data['Location']
+        companyID = the_data['CompanyID']
 
-        # Construct the SQL query for updating the application
-        query = f'''
-            UPDATE Company
-            SET 
-                CompanyName = '{company_name}',
-                Industry = '{industry}',
-                Location = {location},
-            WHERE CompanyID = {CompanyID}
+
+        # Construct the SQL query for updating the company
+        query = '''
+        UPDATE Company
+        SET CompanyName = %s,
+            Industry = %s,
+            Location = %s
+        WHERE CompanyID = %s
         '''
 
-        # Log query for debugging
+        # Log the query for debugging
         current_app.logger.info(f"Executing query: {query}")
 
-        # Execute and commit the query
+        # Execute the query with parameters
         cursor = db.get_db().cursor()
-        cursor.execute(query)
+        cursor.execute(query, (company_name, industry, location, companyID))
         db.get_db().commit()
 
         # Return a success response
@@ -179,4 +179,4 @@ def update_company(CompanyID):
 
     except Exception as e:
         current_app.logger.error(f"Error updating company: {e}")
-        return jsonify({"error": "Failed to update company"}), 500
+        return jsonify({"error": f"Failed to update company: {e}"}), 500

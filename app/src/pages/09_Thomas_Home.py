@@ -11,10 +11,10 @@ SideBarLinks()
 
 st.title('Welcome Thomas!')
 
-if st.button('Company Tracking', 
+if st.button('Company Sponsorship History', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/50_Company_Tracking.py')
+  st.switch_page('pages/93_Sponsorship_History.py')
 
 if st.button('Job Applications', 
              type='primary',

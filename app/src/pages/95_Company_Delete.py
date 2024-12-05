@@ -5,7 +5,7 @@ import requests
 with st.form("delete_company_form"):
     
    
-    companyID = st.number_input("CompanyID to edit")
+    companyID = st.number_input("CompanyID to delete")
     
    
 # Add the submit button (which every form needs)
@@ -13,7 +13,7 @@ with st.form("delete_company_form"):
 
     if submit_button:
         if companyID > 50:
-            st.error("Please enter a valid company ID")
+            st.error("Please enter a valid Company ID")
         else:
             # We only get into this else clause if all the input fields have something 
             # in them. 
