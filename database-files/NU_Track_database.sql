@@ -142,7 +142,7 @@ CREATE TABLE Interview (
     Round VARCHAR(50) NOT NULL,
     CompanyID INT NOT NULL,
     InterviewerID INT NOT NULL,
-    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID),
+    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID) ON DELETE CASCADE,
     FOREIGN KEY (InterviewerID) REFERENCES Interviewer(InterviewerID)
 );
 
