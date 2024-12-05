@@ -45,6 +45,12 @@ if st.button('Filter Interviews By Round',
   st.session_state.student_nuid = 1004
   st.switch_page('pages/14_Filter_By_Round_Interviews.py')
 
+if st.button('Filter Interviews By Date', 
+             type='primary',
+             use_container_width=True):
+  st.session_state.student_nuid = 1004
+  st.switch_page('pages/14_Filter_By_Date_Interviews.py')
+
 if "student_nuid" not in st.session_state:
     st.session_state.student_nuid = None
     

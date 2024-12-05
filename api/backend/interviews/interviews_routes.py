@@ -4,6 +4,7 @@ from flask import jsonify
 from flask import make_response
 from flask import current_app
 from backend.db_connection import db
+from datetime import datetime
 
 interviews = Blueprint('interviews', __name__)
 @interviews.route('/interviews/<StudentNUID>', methods=['GET'])
@@ -181,6 +182,48 @@ def get_interviews_by_round(round):
     except Exception as e:
         current_app.logger.error(f"Error fetching interviews for round {round}: {e}")
         return make_response(jsonify({"error": "Internal server error"}), 500)
+    
+
+    from datetime import datetime
+
+@interviews.route('/filterDate/interview_date/<string:interview_date>', methods=['GET'])
+def get_interviews_by_date(interview_date):
+    try:
+        # Convert the date string to a proper date format (e.g., '2024-12-05')
+        date_object = datetime.strptime(interview_date, "%Y-%m-%d").date()
+        
+        # SQL query to fetch interviews by date
+        query = '''
+            SELECT 
+                I.InterviewID,
+                I.Dates AS InterviewDate,
+                I.Locations AS InterviewLocation,
+                I.InterviewType,
+                I.Round,
+                C.CompanyName,
+                CONCAT(IV.FirstName, ' ', IV.LastName) AS InterviewerName,
+                IV.Email AS InterviewerEmail
+            FROM Interview I
+            JOIN Company C ON I.CompanyID = C.CompanyID
+            JOIN Interviewer IV ON I.InterviewerID = IV.InterviewerID
+            WHERE I.Dates = %s
+        '''
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (date_object,))
+        interviews = cursor.fetchall()
+
+        # If no interviews were found for the specified date, return a 404
+        if not interviews:
+            return make_response(jsonify({"error": "No interviews found for this date."}), 404)
+
+        # Return interviews as JSON
+        return make_response(jsonify(interviews), 200)
+
+    except Exception as e:
+        current_app.logger.error(f"Error fetching interviews for date {interview_date}: {e}")
+        return make_response(jsonify({"error": "Internal server error"}), 500)
+
 
 
 
