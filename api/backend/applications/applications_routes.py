@@ -40,6 +40,48 @@ def get_user_applications(StudentNUID):
     the_response.status_code = 200
     return the_response
 
+@applications.route('/applications/<ApplicationID>', methods=['PUT'])
+def update_application(ApplicationID):
+    try:
+        # Collect data from the request
+        the_data = request.json
+        current_app.logger.info(the_data)
+
+        # Extract variables from request
+        date_submitted = the_data.get('DateSubmitted')
+        status = the_data.get('Status')
+        priority = the_data.get('Priority')
+        notes = the_data.get('Notes')
+
+        # Construct the SQL query for updating the application
+        query = f'''
+            UPDATE Application
+            SET 
+                DateSubmitted = '{date_submitted}',
+                Status = '{status}',
+                Priority = {priority},
+                Notes = '{notes}'
+            WHERE ApplicationID = {ApplicationID}
+        '''
+
+        # Log query for debugging
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute and commit the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        db.get_db().commit()
+
+        # Return a success response
+        response = make_response(jsonify({"message": "Application updated successfully"}))
+        response.status_code = 200
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating application: {e}")
+        return jsonify({"error": "Failed to update application"}), 500
+
+
 
 @applications.route('/applications', methods=['POST'])
 def add_application():
@@ -77,4 +119,8 @@ def add_application():
 
     except Exception as e:
         current_app.logger.error(f"Error adding application: {e}")
-        return jsonify({"error": "Failed to add application"}), 500
+        return jsonify({"error": "Failed to add application"}), 500 
+    
+    
+    
+    
