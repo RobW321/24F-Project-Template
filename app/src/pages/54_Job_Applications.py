@@ -14,7 +14,7 @@ st.title('Welcome Thomas!')
 if st.button('Add Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/51_Add_Applications.py')
+  st.switch_page('pages/12_Get_Applications.py')
 
 if st.button('Delete Applications', 
              type='primary',
@@ -32,4 +32,4 @@ if st.button(
     # Set the student_nuid value in session state
     st.session_state.student_nuid = 1003
     # Navigate to the page displaying applications
-    st.switch_page('pages/12_Add_Applications.py')
+    st.switch_page('pages/12_Get_Applications.py')
