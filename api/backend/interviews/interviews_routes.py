@@ -39,6 +39,51 @@ def get_interviews(StudentNUID):
     return the_response
 
 
+@interviews.route('/interviews/<int:InterviewID>', methods=['PUT'])
+def update_interview(InterviewID):
+    current_app.logger.info('PUT /interviews/<InterviewID> route')
+
+    # Get data from the request body
+    data = request.get_json()
+
+    # Extract the details for the interview that need to be updated
+    interview_type = data.get('InterviewType')
+    round_ = data.get('Round')
+    company_id = data.get('CompanyID')
+    interviewer_id = data.get('InterviewerID')
+    date = data.get('Date')
+    location = data.get('Location')
+
+    if not all([interview_type, round_, company_id, interviewer_id, date]):
+        return make_response(jsonify({"error": "Missing required fields"}), 400)
+
+    # Create the update query
+    query = '''
+        UPDATE Interview
+        SET InterviewType = %s,
+            Round = %s,
+            CompanyID = %s,
+            InterviewerID = %s,
+            Dates = %s,
+            Locations = %s
+        WHERE InterviewID = %s
+    '''
+    
+    try:
+        # Execute the update query
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (interview_type, round_, company_id, interviewer_id, date, location, InterviewID))
+        db.get_db().commit()
+
+        # Check if any row was updated
+        if cursor.rowcount == 0:
+            return make_response(jsonify({"error": "Interview not found"}), 404)
+
+        return make_response(jsonify({"message": "Interview updated successfully"}), 200)
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating interview: {e}")
+        return make_response(jsonify({"error": "Internal server error"}), 500)
 
 
 

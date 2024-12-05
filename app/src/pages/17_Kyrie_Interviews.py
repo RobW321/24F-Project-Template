@@ -29,7 +29,7 @@ if st.button('Add Interviews',
 if st.button('Edit Interviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/12_Update_Application.py')
+  st.switch_page('pages/14_Update_Interviews.py')
 
 if st.button('Delete Interviews', 
              type='primary',
