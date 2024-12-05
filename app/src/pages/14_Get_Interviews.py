@@ -1,25 +1,44 @@
-import logging
-logger = logging.getLogger(__name__)
-import streamlit as st
 import requests
-from streamlit_extras.app_logo import add_logo
+import streamlit as st
 from modules.nav import SideBarLinks
 
 SideBarLinks()
 
-st.title("Viewing all Active Interviews")
+st.title(f"Your Interviews:")
 
-"""
-Viewing all the tickets for all employees that are currenly open or recently close!
-"""
-data = {} 
-try:
-  data = requests.get('http://api:4000/i/interviews').json()
-except:
-  st.write("**Important**: Could not connect to sample api, so using dummy data.")
-  data = {"a":{"b": "123", "c": "hello"}, "z": {"b": "456", "c": "goodbye"}}
+# Fetch the student_nuid from session state
+if "student_nuid" in st.session_state and st.session_state.student_nuid is not None:
+    student_nuid = st.session_state.student_nuid
 
-st.dataframe(data)
+    # Fetch interviews for the student
+    try:
+        API_URL = "http://api:4000/i/interviews"
+        response = requests.get(f"{API_URL}/{student_nuid}")
+        response.raise_for_status()
+        interviews = response.json()
 
+        if not interviews:
+            st.write("No interviews found.")
+        else:
+            # Convert interviews to a structured format for the table
+            data = [
+                {
+                    "Interview ID": interview.get("InterviewID", "N/A"),
+                    "Interview Type": interview.get("InterviewType", "N/A"),
+                    "Round": interview.get("Round", "N/A"),
+                    "Company": interview.get("CompanyName", "N/A"),
+                    "Interviewer": interview.get("InterviewerName", "N/A"),
+                    "Interviewer Email": interview.get("InterviewerEmail", "N/A")
+                }
+                for interview in interviews
+            ]
 
+            # Display interviews as a table
+            st.table(data)
 
+    except requests.exceptions.RequestException as e:
+        st.error("Failed to fetch interviews. Please try again later.")
+        st.error(e)
+
+else:
+    st.error("No student NUID found in session state. Please navigate from the main page.")

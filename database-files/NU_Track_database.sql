@@ -136,8 +136,8 @@ CREATE TABLE Interviewer (
 
 CREATE TABLE Interview (
     InterviewID INT PRIMARY KEY NOT NULL,
-    Date DATE NOT NULL,
-    Location VARCHAR(100),
+    Dates DATE NOT NULL,
+    Locations VARCHAR(100),
     InterviewType VARCHAR(50) NOT NULL,
     Round VARCHAR(50) NOT NULL,
     CompanyID INT NOT NULL,
@@ -795,7 +795,7 @@ VALUES
 (50, 'Victoria', 'Parker', 'victoria.parker@company.com', 'Technical Support Specialist');
 
 -- Interview
-INSERT INTO Interview (InterviewID, Date, Location, InterviewType, Round, CompanyID, InterviewerID)
+INSERT INTO Interview (InterviewID, Dates, Locations, InterviewType, Round, CompanyID, InterviewerID)
 VALUES
 (1, '2024-11-10', 'New York Office', 'Technical', '1st Round', 1, 2),
 (2, '2024-11-12', 'Detroit Office', 'Behavioral', '1st Round', 2, 1),

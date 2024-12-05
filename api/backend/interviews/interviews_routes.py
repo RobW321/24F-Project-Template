@@ -6,37 +6,37 @@ from flask import current_app
 from backend.db_connection import db
 
 interviews = Blueprint('interviews', __name__)
-
-# ------------------------------------------------------------
-# Route to view all tickets or filter by status/priority
-@interviews.route('/interviews', methods=['GET'])
-# Get all the products from the database, package them up,
-# and return them to the client
-def get_interviews():
-    query = '''
-        SELECT 
-            *
-        FROM Interview
-    '''
-    
-    # get a cursor object from the database
+@interviews.route('/interviews/<StudentNUID>', methods=['GET'])
+def get_interviews(StudentNUID):
+    current_app.logger.info('get /interviews/<StudentNUID> route')
     cursor = db.get_db().cursor()
-
-    # use cursor to query the database for a list of products
+    query = '''
+            SELECT 
+                I.InterviewID,
+                I.InterviewType,
+                I.Round,
+                C.CompanyName,
+                C.Location AS CompanyLocation,
+                CONCAT(IV.FirstName, ' ', IV.LastName) AS InterviewerName,
+                IV.Email AS InterviewerEmail
+            FROM 
+                Interview I
+            JOIN 
+                Company C ON I.CompanyID = C.CompanyID
+            JOIN 
+                Interviewer IV ON I.InterviewerID = IV.InterviewerID
+            JOIN 
+                Application A ON A.JobID = I.CompanyID
+            WHERE 
+                A.StudentNUID = {0}'''.format(StudentNUID)
+    
+    
     cursor.execute(query)
-
-    # fetch all the data from the cursor
-    # The cursor will return the data as a 
-    # Python Dictionary
     theData = cursor.fetchall()
 
-    # Create a HTTP Response object and add results of the query to it
-    # after "jasonify"-ing it.
-    response = make_response(jsonify(theData))
-    # set the proper HTTP Status code of 200 (meaning all good)
-    response.status_code = 200
-    # send the response back to the client
-    return response
+    the_response = make_response(jsonify(theData))
+    the_response.status_code = 200
+    return the_response
 
 
 
