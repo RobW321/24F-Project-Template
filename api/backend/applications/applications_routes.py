@@ -41,8 +41,8 @@ def get_user_applications(StudentNUID):
     the_response.status_code = 200
     return the_response
 
-@applications.route('/applications/<ApplicationID>', methods=['PUT'])
-def update_application(ApplicationID):
+@applications.route('/applications/<ApplicationID>/<Student_NUID>', methods=['PUT'])
+def update_application(ApplicationID, Student_NUID):
     try:
         # Collect data from the request
         the_data = request.json
@@ -62,7 +62,7 @@ def update_application(ApplicationID):
                 Status = '{status}',
                 Priority = {priority},
                 Notes = '{notes}'
-            WHERE ApplicationID = {ApplicationID}
+            WHERE ApplicationID = {ApplicationID} AND StudentNUID = {Student_NUID}
         '''
 
         # Log query for debugging
@@ -157,8 +157,8 @@ def delete_application(ApplicationID, student_nuid):
         current_app.logger.error(f"Error deleting application: {e}")
         return jsonify({"error": "Failed to delete application"}), 500
     
-@applications.route('/applications/priority/<int:priority>', methods=['GET'])
-def get_applications_by_priority(priority):
+@applications.route('/applications/priority/<int:priority>/<student_nuid>', methods=['GET'])
+def get_applications_by_priority(priority, student_nuid):
     """
     Fetches all applications with the specified priority level.
     """
@@ -176,7 +176,7 @@ def get_applications_by_priority(priority):
             FROM Application a
             JOIN Job j ON a.JobID = j.JobID
             JOIN Company c ON j.CompanyID = c.CompanyID
-            WHERE a.Priority = {priority}
+            WHERE a.Priority = {priority} AND a.StudentNUID = {student_nuid}
         '''
         
         # Log the query for debugging
@@ -197,8 +197,8 @@ def get_applications_by_priority(priority):
         return jsonify({"error": "Failed to fetch applications"}), 500
     
 
-@applications.route('/applications/status/<string:status>', methods=['GET'])
-def get_applications_by_status(status):
+@applications.route('/applications/status/<string:status>/<Student_NUID>', methods=['GET'])
+def get_applications_by_status(status, Student_NUID):
     """
     Fetches all applications with the specified status.
     """
@@ -216,7 +216,7 @@ def get_applications_by_status(status):
             FROM Application a
             JOIN Job j ON a.JobID = j.JobID
             JOIN Company c ON j.CompanyID = c.CompanyID
-            WHERE a.Status = '{status}'
+            WHERE a.Status = '{status}' AND a.StudentNUID = {Student_NUID}
         '''
         
         # Log the query for debugging

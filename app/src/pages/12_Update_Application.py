@@ -11,6 +11,10 @@ st.title("Update an Existing Job Application")
 # Instruction
 st.write("Fill out the form below to update an application.")
 
+
+if "student_nuid" in st.session_state and st.session_state.student_nuid is not None:
+    student_nuid = st.session_state.student_nuid
+
 # Form to get user inputs
 with st.form("update_application_form"):
     application_id = st.number_input("Application ID (e.g., 1):", min_value=1, step=1, format="%d")
@@ -34,7 +38,7 @@ if submitted:
 
     try:
         # Send the payload to the backend API
-        response = requests.put(f"{API_URL}/{application_id}", json=payload)
+        response = requests.put(f"{API_URL}/{application_id}/{student_nuid}", json=payload)
         response.raise_for_status()
 
         # Success message

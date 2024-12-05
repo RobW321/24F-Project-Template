@@ -8,6 +8,9 @@ SideBarLinks()
 # Backend API URL
 API_URL = "http://api:4000/a/applications"
 
+if "student_nuid" in st.session_state and st.session_state.student_nuid is not None:
+    student_nuid = st.session_state.student_nuid
+
 # Streamlit Page Setup
 st.title("View Applications by Priority")
 
@@ -21,7 +24,7 @@ priority = st.selectbox("Priority Level:", [1, 2, 3], format_func=lambda x: f"Pr
 if st.button("Get Applications"):
     try:
         # Send GET request to the backend API
-        response = requests.get(f"{API_URL}/priority/{priority}")
+        response = requests.get(f"{API_URL}/priority/{priority}/{student_nuid}")
         response.raise_for_status()
 
         # Process the data
