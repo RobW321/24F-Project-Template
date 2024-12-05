@@ -26,7 +26,7 @@ student_nuid = st.session_state.student_nuid
 with st.form("add_application_form"):
     # Display NUID as a static field since it's taken from the session state
     st.text(f"Student NUID: {student_nuid}")
-    job_id = st.number_input("Job ID (e.g., 1):", min_value=1, step=1, format="%d")
+    job_id = st.number_input("Job ID (max 50):", min_value=1, step=1, format="%d")
     date_submitted = st.date_input("Date Submitted:", value=date.today())
     status = st.selectbox("Status:", ["In Progress", "Accepted", "Rejected"])
     priority = st.slider("Priority (1 = High, 3 = Low):", min_value=1, max_value=3)
