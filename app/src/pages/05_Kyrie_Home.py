@@ -14,17 +14,13 @@ st.write('')
 st.write('')
 st.write('### What would you like to do today?')
 
-if st.button(
-    'View Applications',
-    type='primary',
-    use_container_width=True
-):
-    # Set the student_nuid value in session state
-    st.session_state.student_nuid = 1004
-    # Navigate to the page displaying applications
-    st.switch_page('pages/14_Get_Interviews.py')
+if st.button('Job Applications', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/16_Kyrie_Job_Applications.py')
 
-if st.button('View World Map Demo', 
+if st.button('Interviews', 
              type='primary',
              use_container_width=True):
   st.switch_page('pages/14_Get_Interviews.py')
+
