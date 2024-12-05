@@ -1,5 +1,8 @@
 import streamlit as st
 import requests
+from modules.nav import SideBarLinks
+
+SideBarLinks()
 
 
 with st.form("delete_company_form"):
