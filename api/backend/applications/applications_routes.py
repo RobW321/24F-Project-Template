@@ -5,6 +5,7 @@ from flask import make_response
 from flask import current_app
 from backend.db_connection import db
 
+
 applications = Blueprint('applications', __name__)
 @applications.route('/applications/<StudentNUID>', methods=['GET'])
 def get_user_applications(StudentNUID):
@@ -123,8 +124,8 @@ def add_application():
     
 
 
-@applications.route('/applications/<ApplicationID>', methods=['DELETE'])
-def delete_application(ApplicationID):
+@applications.route('/applications/<ApplicationID>/<student_nuid>', methods=['DELETE'])
+def delete_application(ApplicationID, student_nuid):
     """
     Deletes a job application based on the ApplicationID.
     """
@@ -132,7 +133,7 @@ def delete_application(ApplicationID):
         # SQL query to delete the application
         query = f'''
             DELETE FROM Application
-            WHERE ApplicationID = {ApplicationID}
+            WHERE ApplicationID = {ApplicationID} AND StudentNUID = {student_nuid}
         '''
         
         # Log the query for debugging
@@ -145,7 +146,7 @@ def delete_application(ApplicationID):
 
         # Check if any row was deleted
         if cursor.rowcount == 0:
-            return jsonify({"error": "Application not found"}), 404
+            return jsonify({"error": "Application not found or you don't have permission to delete it."}), 404
 
         # Return success response
         response = make_response(jsonify({"message": "Application deleted successfully"}))

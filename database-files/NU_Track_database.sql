@@ -95,11 +95,11 @@ CREATE TABLE Job (
     SponsorshipRequired BOOLEAN,
     Deadline DATE NOT NULL,
     CompanyID INT NOT NULL,
-    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID) ON DELETE CASCADE
+    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Application (
-    ApplicationID INT PRIMARY KEY AUTO_INCREMENT,
+    ApplicationID INT PRIMARY KEY AUTO_INCREMENT
     DateSubmitted DATE NOT NULL,
     Status VARCHAR(50) NOT NULL,
     Priority INT NOT NULL,

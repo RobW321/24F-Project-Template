@@ -5,6 +5,10 @@ from modules.nav import SideBarLinks
 
 SideBarLinks()
 
+
+if "student_nuid" in st.session_state and st.session_state.student_nuid is not None:
+    student_nuid = st.session_state.student_nuid
+
 # Backend API URL
 API_URL = "http://api:4000/a/applications"
 
@@ -23,7 +27,7 @@ with st.form("delete_application_form"):
 if submitted:
     try:
         # Send the DELETE request to the backend API
-        response = requests.delete(f"{API_URL}/{application_id}")
+        response = requests.delete(f"{API_URL}/{application_id}/{student_nuid}")
         response.raise_for_status()
 
         # Success message
@@ -32,7 +36,7 @@ if submitted:
 
     except requests.exceptions.HTTPError as http_err:
         if response.status_code == 404:
-            st.error("Application not found.")
+            st.error("Application not found or you dont have permission to delete it.")
         else:
             st.error("Failed to delete application. Please try again.")
             st.error(http_err)

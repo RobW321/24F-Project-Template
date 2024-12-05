@@ -93,8 +93,6 @@ if st.button(
     type='primary',
     use_container_width=True
 ):
-    # Set the student_nuid value in session state
-    st.session_state.student_nuid = 1003
     # Navigate to the page displaying applications
     st.switch_page('pages/12_Get_Applications.py')
 
@@ -104,7 +102,6 @@ if st.button(
     use_container_width=True
 ):
     # Set the student_nuid value in session state
-    st.session_state.student_nuid = 1001
     # Navigate to the page displaying applications
     st.switch_page('pages/12_Filter_Application.py')
 
