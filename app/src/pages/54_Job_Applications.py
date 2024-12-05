@@ -111,5 +111,14 @@ if st.button(
     # Navigate to the page displaying applications
     st.switch_page('pages/12_Filter_Application.py')
 
+if st.button(
+    'Filter Applications by Status',
+    type='primary',
+    use_container_width=True
+):
+    # Set the student_nuid value in session state
+    # Navigate to the page displaying applications
+    st.switch_page('pages/12_Filter_By_Status_Application.py')
+
     
 
