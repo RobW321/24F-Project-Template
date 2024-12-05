@@ -48,7 +48,7 @@ if st.button("Act as Joe Wellington, a regular Co-op seeker",
     # when user clicks the button, they are now considered authenticated
     st.session_state['authenticated'] = True
     # we set the role of the current user
-    st.session_state['role'] = 'regular_student'
+    st.session_state['role'] = 'joe_student'
     # we add the first name of the user (so it can be displayed on 
     # subsequent pages). 
     st.session_state['first_name'] = 'Joe'
@@ -62,7 +62,7 @@ if st.button('Act as Josh Brown, Data-Driven Applicant',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'usaid_worker'
+    st.session_state['role'] = 'josh_student'
     st.session_state['first_name'] = 'Mohammad'
     st.switch_page('pages/07_Josh_Home.py')
 
@@ -70,7 +70,7 @@ if st.button('Act as Thomas Scott, International Student',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'regular_student'
+    st.session_state['role'] = 'thomas_student'
     st.session_state['first_name'] = 'Thomas'
     st.switch_page('pages/09_Thomas_Home.py')
 
@@ -86,7 +86,7 @@ if st.button('Act as Kyrie Irving, Fourth-Year Student Applicant',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'administrator'
+    st.session_state['role'] = 'kyrie_student'
     st.session_state['first_name'] = 'Kyrie'
     st.switch_page('pages/05_Kyrie_Home.py')
 
