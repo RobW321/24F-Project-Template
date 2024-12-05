@@ -1,6 +1,9 @@
 import streamlit as st
 import requests
 from datetime import date
+from modules.nav import SideBarLinks
+
+SideBarLinks()
 
 # Backend API URL
 API_URL = "http://api:4000/i/interviews"
