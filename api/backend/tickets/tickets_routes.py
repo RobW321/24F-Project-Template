@@ -40,22 +40,28 @@ def get_tickets():
 
 
 #------------------------------------------------------------
-# Update customer info for customer with particular userID
+# Update customer info for customer with particular userID TicketID, Description, Status, Priority, TicketType, EmployeeID, StudentNUID
 #   Notice the manner of constructing the query.
-@tickets.route('/tickets/edit', methods=['PUT'])
+@tickets.route('/edit', methods=['PUT'])
 def update_tickets():
-    current_app.logger.info('PUT /tickets route')
-    ticket_info = request.json
-    cust_id = cust_info['id']
-    first = cust_info['first_name']
-    last = cust_info['last_name']
-    company = cust_info['company']
+    the_data = request.json
+    current_app.logger.info(the_data)
+   
+    status = the_data['Status']
+    priority = the_data['Priority']
+    employeeID = the_data['EmployeeID']
+    ticketID = the_data['TicketID']
 
-    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
-    data = (first, last, company, cust_id)
+    query = 'UPDATE Ticket SET Status = %s, Priority = %s, employeeID = %s Where TicketID = %s' 
+
+    current_app.logger.info(query) 
+    data = (status, priority, employeeID, ticketID)
     cursor = db.get_db().cursor()
-    r = cursor.execute(query, data)
+    cursor.execute(query, data)
     db.get_db().commit()
-    return 'customer updated!'
+    response = make_response("Successfully edited ticket")
+    response.status_code = 200
+    return response
+
 
 

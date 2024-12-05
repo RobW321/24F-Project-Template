@@ -15,3 +15,9 @@ if st.button('View Tickets',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/60_View_Tickets.py')
+
+
+if st.button('Edit Tickets', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/62_Edit_Ticket.py')
