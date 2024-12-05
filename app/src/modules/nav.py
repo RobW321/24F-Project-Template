@@ -29,6 +29,19 @@ def HomeNav():
 def AboutPageNav():
     st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
 
+def JoeHomePage():
+    st.sidebar.page_link("pages/06_Joe_Home.py", label="Joe Home", icon="👤")
+
+def JoshHomePage():
+    st.sidebar.page_link("pages/07_Josh_Home.py", label="Josh Home", icon="👤")
+
+def ThomasHomePage():
+    st.sidebar.page_link("pages/09_Thomas_Home.py", label="Thomas Home", icon="👤")
+
+def KyrieHomePage():
+    st.sidebar.page_link("pages/05_Kyrie_Home.py", label="Kyrie Home", icon="👤")
+
+
 
 #### ------------------------ Examples for Role of pol_strat_advisor ------------------------
 def PolStratAdvHomeNav():
@@ -126,19 +139,11 @@ def SideBarLinks(show_home=True):
         st.session_state.authenticated = False
         st.switch_page("Home.py")
 
-    if show_home:
+    ## if show_home:
         # Show the Home page link (the landing page)
-        HomeNav()
 
     # Show the other page navigators depending on the users' role.
     if st.session_state["authenticated"]:
-
-
-
-        
-
-
-
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
 
@@ -152,10 +157,17 @@ def SideBarLinks(show_home=True):
         if st.session_state["role"] == "administrator":
             SakaiHomePage()
 
-        if st.session_state["role"] == "experienced_student":
-            AddApplication()
-            DeleteApplication()
-            SortApplication()
+        if st.session_state["role"] == "joe_student":
+            JoeHomePage()
+
+        if st.session_state["role"] == "josh_student":
+            JoshHomePage()
+        
+        if st.session_state["role"] == "thomas_student":
+            ThomasHomePage()
+
+        if st.session_state["role"] == "kyrie_student":
+            KyrieHomePage()
 
     # Always show the About page at the bottom of the list of links
     AboutPageNav()
@@ -166,3 +178,8 @@ def SideBarLinks(show_home=True):
             del st.session_state["role"]
             del st.session_state["authenticated"]
             st.switch_page("Home.py")
+
+def AboutPage():
+    st.sidebar.page_link("Home.py", label="Home", icon="🏠")
+    st.sidebar.page_link("pages/30_About.py", label="About", icon="🧠")
+        

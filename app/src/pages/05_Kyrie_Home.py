@@ -19,7 +19,7 @@ st.write('### What would you like to do today?')
 if st.button('Job Applications', 
              type='primary',
              use_container_width=True):
-    st.session_state.student_nuid = 1004 # Set the NUID to 1003
+    st.session_state.student_nuid = 1004 # Set the NUID to 1004
     st.switch_page('pages/54_Job_Applications.py')
 
 if st.button('Interviews', 
