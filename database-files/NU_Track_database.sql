@@ -93,7 +93,7 @@ CREATE TABLE Job (
     SponsorshipRequired BOOLEAN,
     Deadline DATE NOT NULL,
     CompanyID INT NOT NULL,
-    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID)
+    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID) ON DELETE CASCADE
 );
 
 CREATE TABLE Application (
@@ -105,7 +105,7 @@ CREATE TABLE Application (
     JobID INT NOT NULL,
     Notes TEXT,
     FOREIGN KEY (StudentNUID) REFERENCES Student(NUID),
-    FOREIGN KEY (JobID) REFERENCES Job(JobID)
+    FOREIGN KEY (JobID) REFERENCES Job(JobID) ON DELETE CASCADE
 );
 
 /*CREATE TABLE IF NOT EXISTS `nutrack`.`applications` (
@@ -142,7 +142,7 @@ CREATE TABLE Interview (
     Round VARCHAR(50) NOT NULL,
     CompanyID INT NOT NULL,
     InterviewerID INT NOT NULL,
-    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID),
+    FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID) ON DELETE CASCADE,
     FOREIGN KEY (InterviewerID) REFERENCES Interviewer(InterviewerID)
 );
 

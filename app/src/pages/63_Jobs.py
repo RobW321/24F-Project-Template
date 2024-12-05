@@ -9,14 +9,19 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('Welcome Josh!')
 
-if st.button('Job Applications', 
+
+if st.button('All Jobs', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/54_Job_Applications.py')
+  st.switch_page('pages/63_View_Jobs.py')
 
-if st.button('View Sankey Diagram', 
+if st.button('Edit Jobs', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/07_Sankey.py')
+  st.switch_page('pages/63_Edit_Jobs.py')
+
+if st.button('Delete Jobs', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/63_Delete_Jobs.py')
