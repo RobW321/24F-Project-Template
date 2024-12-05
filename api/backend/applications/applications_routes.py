@@ -194,6 +194,31 @@ def get_applications_by_priority(priority):
     except Exception as e:
         current_app.logger.error(f"Error fetching applications by priority: {e}")
         return jsonify({"error": "Failed to fetch applications"}), 500
+    
+
+@applications.route('/flowchart', methods=['GET'])
+def get_flowchart_data():
+    """
+    Fetches all records from the FlowChart table in the database.
+    """
+    # SQL query to fetch all records from FlowChart table
+    query = '''
+        SELECT 
+            FlowChartID,
+            NumApplications,
+            NumProgress,
+            NumRejected,
+            NumAccepted
+        FROM FlowChart
+    '''
+    
+    # Get a cursor object from the database
+    cursor = db.get_db().cursor()
+    cursor.execute(query)  # Execute the query
+    data = cursor.fetchall()  # Fetch all results
+
+    # Return the data as JSON response
+    return jsonify(data)
 
     
     
