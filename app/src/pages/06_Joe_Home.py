@@ -9,10 +9,8 @@ st.set_page_config(layout='wide')
 # Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
-st.title(f"Welcome, Joe.")
-st.write('')
-st.write('')
-st.write('### What would you like to do today?')
+st.title(f"Welcome Joe!")
+
 
 # Initialize Streamlit session state for student_nuid if not already set
 if "student_nuid" not in st.session_state:
