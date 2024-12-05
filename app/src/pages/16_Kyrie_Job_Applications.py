@@ -34,7 +34,7 @@ if st.button('Edit Applications',
 if st.button('Delete Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/52_Delete_Applications.py')
+  st.switch_page('pages/12_Delete_Application.py')
 
 if "student_nuid" not in st.session_state:
     st.session_state.student_nuid = None
