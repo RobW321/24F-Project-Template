@@ -3,28 +3,15 @@ logger = logging.getLogger(__name__)
 
 import streamlit as st
 from modules.nav import SideBarLinks
+import requests
 
 st.set_page_config(layout = 'wide')
 
-# Show appropriate sidebar links for the role of the currently logged in user
 SideBarLinks()
 
-st.title(f"Welcome, Josh.")
-st.write('')
-st.write('')
-st.write('### What would you like to do today?')
+st.title('Welcome Josh!')
 
-if st.button(
-    'View Applications',
-    type='primary',
-    use_container_width=True
-):
-    # Set the student_nuid value in session state
-    st.session_state.student_nuid = 1002
-    # Navigate to the page displaying applications
-    st.switch_page('pages/12_Get_Applications.py')
-
-if st.button('View World Map Demo', 
+if st.button('Job Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/54_Job_Applications.py')
