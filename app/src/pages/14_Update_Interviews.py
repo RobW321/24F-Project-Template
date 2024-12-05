@@ -5,6 +5,7 @@ from datetime import date
 # Backend API URL
 API_URL = "http://api:4000/i/interviews"
 
+
 # Streamlit Page Setup
 st.title("Update an Existing Interview")
 

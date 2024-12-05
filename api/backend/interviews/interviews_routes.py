@@ -41,8 +41,8 @@ def get_interviews(StudentNUID):
     return the_response
 
 
-@interviews.route('/interviews/<InterviewID>', methods=['PUT'])
-def update_interview(InterviewID):
+@interviews.route('/interviews/<InterviewID>/<student_nuid>', methods=['PUT'])
+def update_interview(InterviewID, student_nuid):
     try:
         data = request.json
         current_app.logger.info(data)
@@ -61,7 +61,7 @@ def update_interview(InterviewID):
                 Round = '{round}',
                 Dates = '{interview_date}',
                 Locations = '{location}'
-            WHERE InterviewID = '{InterviewID}'
+            WHERE InterviewID = '{InterviewID}' AND 
         '''
     
     
