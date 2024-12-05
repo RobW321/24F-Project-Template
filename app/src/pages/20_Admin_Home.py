@@ -9,9 +9,9 @@ st.set_page_config(layout = 'wide')
 
 SideBarLinks()
 
-st.title('System Admin Home Page')
+st.title('System Admin Dashboard')
 
-if st.button('Update ML Models', 
+if st.button('View Tickets', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/21_ML_Model_Mgmt.py')
+  st.switch_page('pages/60_View_Tickets.py')
