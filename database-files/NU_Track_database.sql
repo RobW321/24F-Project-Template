@@ -97,7 +97,7 @@ CREATE TABLE Job (
 );
 
 CREATE TABLE Application (
-    ApplicationID INT PRIMARY KEY NOT NULL,
+    ApplicationID INT PRIMARY KEY AUTO_INCREMENT,
     DateSubmitted DATE NOT NULL,
     Status VARCHAR(50) NOT NULL,
     Priority INT NOT NULL,
