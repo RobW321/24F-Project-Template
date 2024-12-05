@@ -86,7 +86,7 @@ if st.button('Act as Kyrie Irving, Fourth-Year Student Applicant',
             type = 'primary', 
             use_container_width=True):
     st.session_state['authenticated'] = True
-    st.session_state['role'] = 'experienced_student'
+    st.session_state['role'] = 'administrator'
     st.session_state['first_name'] = 'Kyrie'
     st.switch_page('pages/05_Kyrie_Home.py')
 
