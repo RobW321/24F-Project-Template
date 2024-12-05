@@ -61,6 +61,6 @@ with st.form("edit_ticket_form"):
                 if response.status_code == 200:
                     st.success("Ticket edited successfully!")
                 else:
-                    st.error(f"Error adding product: {response.text}")
+                    st.error(f"Error editing ticket: {response.text}")
             except requests.exceptions.RequestException as e:
                 st.error(f"Error connecting to server: {str(e)}")

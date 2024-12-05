@@ -66,14 +66,39 @@ def update_tickets():
 
 @tickets.route('/delete', methods=['DELETE'])
 def delete_tickets():
-        # Define the query
-    query = "DELETE FROM Ticket WHERE Status = ?"
+    query = "DELETE FROM Ticket WHERE Status = %s"  # For MySQL/PostgreSQL
+    
 
         # Execute the query with the parameter
     cursor = db.get_db().cursor()
-    cursor.execute(query, ('Closed',))  # Tuple is used even for a single parameter
+    cursor.execute(query, ("Closed",))  # Tuple is used even for a single parameter
     
     db.get_db().commit()
     response = make_response("Successfully deleted closed tickets")
+    response.status_code = 200
+    return response
+
+
+@tickets.route('/deletebyid', methods=['DELETE'])
+def delete_specific_tickets():
+    the_data = request.json
+    current_app.logger.info(the_data)
+    ticketID = the_data['TicketID']
+
+    
+
+    query = "DELETE FROM Ticket WHERE TicketID = %s"  # For MySQL/PostgreSQL
+    
+    current_app.logger.info(query)
+    data = (ticketID)
+    
+
+
+        # Execute the query with the parameter
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)  # Tuple is used even for a single parameter
+    
+    db.get_db().commit()
+    response = make_response("Successfully deleted specific ticket")
     response.status_code = 200
     return response
