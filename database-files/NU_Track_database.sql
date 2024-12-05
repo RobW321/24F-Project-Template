@@ -60,7 +60,7 @@ CREATE TABLE Employee (
 );
 
 CREATE TABLE Ticket (
-    TicketID INT PRIMARY KEY NOT NULL,
+    TicketID INT PRIMARY KEY AUTO_INCREMENT,
     Description TEXT,
     Status VARCHAR(50) NOT NULL,
     Priority INT NOT NULL,
