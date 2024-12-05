@@ -220,6 +220,44 @@ def get_flowchart_data():
     # Return the data as JSON response
     return jsonify(data)
 
+@applications.route('/tickets', methods=['PUT'])
+def add_ticket():
+    """
+    Adds a new ticket to the Ticket table in the database.
+    """
+    try:
+        # Parse JSON request
+        ticket_data = request.get_json()
+
+        # Extract required fields
+        description = ticket_data.get("Description")
+        status = ticket_data.get("Status")
+        priority = ticket_data.get("Priority")
+        ticket_type = ticket_data.get("TicketType")
+        employee_id = ticket_data.get("EmployeeID")
+        student_nuid = ticket_data.get("StudentNUID")
+
+        # Validate required fields
+        if not all([description, status, priority, ticket_type, employee_id, student_nuid]):
+            return jsonify({"error": "All fields are required."}), 400
+
+        # SQL query to insert a new ticket
+        query = '''
+            INSERT INTO Ticket (Description, Status, Priority, TicketType, EmployeeID, StudentNUID)
+            VALUES (%s, %s, %s, %s, %s, %s)
+        '''
+        values = (description, status, priority, ticket_type, employee_id, student_nuid)
+
+        # Execute the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query, values)
+        db.get_db().commit()
+
+        return jsonify({"message": "Ticket added successfully."}), 201
+
+    except Exception as e:
+        current_app.logger.error(f"Error adding ticket: {e}")
+        return jsonify({"error": "Failed to add ticket."}), 500
     
     
     

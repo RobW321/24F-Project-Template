@@ -20,3 +20,8 @@ if st.button('View Sankey Diagram',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/07_Sankey.py')
+
+if st.button('Create Ticket', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/07_Add_Ticket.py')
