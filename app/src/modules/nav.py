@@ -82,28 +82,6 @@ def ThomasHome():
 
 
 
-#### ------------------------ regular Student ------------------------
-def AddApplication():
-    st.sidebar.page_link("pages/12_Get_Applications.py", label="Add Applications", icon="🟢")
-
-
-def DeleteApplication():
-    st.sidebar.page_link("pages/52_Delete_Applications.py", label="Delete Applications", icon="❌")
-
-
-def SortApplication():
-    st.sidebar.page_link("pages/53_Sort_Applications.py", label="Sort Applications", icon="🔰")
-
-def GetApplication():
-    st.sidebar.page_link("pages/54_Get_Applications.py", label="Get Applications", icon="📂")
-
-
-
-
-
-
-
-
 
 
 
@@ -164,18 +142,7 @@ def SideBarLinks(show_home=True):
 
         # Show World Bank Link and Map Demo Link if the user is a political strategy advisor role.
         if st.session_state["role"] == "regular_student":
-            AddApplication()
-            DeleteApplication()
-            SortApplication()
-            GetApplication()
-
-
-
-
-
-
-
-
+            PredictionNav()
 
         # If the user role is usaid worker, show the Api Testing page
         if st.session_state["role"] == "usaid_worker":
