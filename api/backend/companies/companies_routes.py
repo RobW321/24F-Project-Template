@@ -38,3 +38,14 @@ def get_tickets():
     # send the response back to the client
     return response
 
+@companies.route('/sponsorships', methods=['GET'])
+def get_companies_sponsorships():
+    query = '''
+        SELECT CompanyName, SponsorshipPercentage, VisaType
+        FROM Company
+        JOIN VisaSponsor ON Company.SponsorID = VisaSponsor.SponsorID
+    '''
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+    data = cursor.fetchall()
+    return jsonify(data)
