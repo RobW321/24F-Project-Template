@@ -22,9 +22,9 @@ if st.button(
     # Set the student_nuid value in session state
     st.session_state.student_nuid = 1004
     # Navigate to the page displaying applications
-    st.switch_page('pages/12_Get_Applications.py')
+    st.switch_page('pages/14_Get_Interviews.py')
 
 if st.button('View World Map Demo', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/02_Map_Demo.py')
+  st.switch_page('pages/14_Get_Interviews.py')
