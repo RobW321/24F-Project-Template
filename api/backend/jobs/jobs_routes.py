@@ -79,29 +79,22 @@ def update_jobs():
 # Delete a specific job by ID
 @jobs.route('/deletebyid', methods=['DELETE'])
 def delete_specific_job():
-    try:
-        the_data = request.json
-        current_app.logger.info(f"Received data: {the_data}")
+    the_data = request.json
+    current_app.logger.info(the_data)
 
         # Extract job ID
-        job_id = the_data.get('job_id')
-        if not job_id:
-            return jsonify({"error": "Job ID is required"}), 400
+    job_id = the_data.get('JobID')
+    query = "DELETE FROM Job WHERE JobID = %s"
 
-        # Prepare and execute the SQL query
-        query = "DELETE FROM Job WHERE JobID = %s"
-        cursor = db.get_db().cursor()
-        cursor.execute(query, (job_id,))  # Use a tuple for single parameters
-        db.get_db().commit()
+    current_app.logger.info(query)
+    data = (job_id)
 
-        # Check if a row was deleted
-        if cursor.rowcount == 0:
-            current_app.logger.warning(f"No job found with job_id: {job_id}")
-            return jsonify({"error": "Job not found"}), 404
 
-        current_app.logger.info(f"Successfully deleted job with job_id: {job_id}")
-        return jsonify({"message": "Successfully deleted the job"}), 200
-
-    except Exception as e:
-        current_app.logger.error(f"Error deleting job: {e}")
-        return jsonify({"error": "Failed to delete job"}), 500
+             # Execute the query with the parameter
+    cursor = db.get_db().cursor()
+    cursor.execute(query, data)  # Tuple is used even for a single parameter
+    
+    db.get_db().commit()
+    response = make_response("Successfully deleted specific Job")
+    response.status_code = 200
+    return response

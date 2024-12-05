@@ -8,25 +8,35 @@ st.set_page_config(layout='wide')
 
 SideBarLinks()
 
-st.title('Job Administration Page')
 st.header('Delete Specific Job')
 
-# Form to delete a specific job
 with st.form("delete_job_form"):
-    job_id = st.number_input("Job ID to delete", min_value=1, step=1)
-
-    # Submit button
+    
+   
+    JobID = st.number_input("JobID to Delete")
+    
+   
+# Add the submit button (which every form needs)
     submit_button = st.form_submit_button("Delete Job")
 
     if submit_button:
-        # Validate the job ID
-        if job_id <= 0:
+        if JobID > 50:
             st.error("Please enter a valid Job ID")
         else:
-            # Prepare data for the API
-            job_data = {"job_id": job_id}
+            # We only get into this else clause if all the input fields have something 
+            # in them. 
+            #
+            # Package the data up that the user entered into 
+            # a dictionary (which is just like JSON in this case)
+            job_data = {
+                "JobID": JobID
+            }
 
             try:
+                # using the requests library to put to /p/product.  Passing
+                # product_data to the endpoint through the json parameter.
+                # This particular end point is located in the products_routes.py
+                # file found in api/backend/products folder. 
                 response = requests.delete('http://api:4000/j/deletebyid', json=job_data)
                 if response.status_code == 200:
                     st.success("Job deleted successfully!")

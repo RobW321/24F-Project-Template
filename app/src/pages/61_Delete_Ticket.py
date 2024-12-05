@@ -31,7 +31,7 @@ st.header('Delete Specific Ticket')
 with st.form("delete_ticket_form"):
     
    
-    ticketID = st.number_input("TicketID to edit")
+    ticketID = st.number_input("TicketID to delete")
     
    
 # Add the submit button (which every form needs)
