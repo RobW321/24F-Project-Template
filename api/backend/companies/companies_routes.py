@@ -78,41 +78,6 @@ def get_companies_sponsorships():
     data = cursor.fetchall()
     return jsonify(data)
 
-@companies.route('/companies/<CompanyID>', methods=['DELETE'])
-def delete_company(CompanyID):
-    """
-    Deletes a Company based on the CompanyID.
-    """
-    try:
-        # SQL query to delete the application
-        query = f'''
-            DELETE FROM Company
-            WHERE CompanyID = {CompanyID}
-        '''
-        
-        # Log the query for debugging
-        current_app.logger.info(f"Executing query: {query}")
-
-        # Execute and commit the query
-        cursor = db.get_db().cursor()
-        cursor.execute(query)
-        db.get_db().commit()
-
-        # Check if any row was deleted
-        if cursor.rowcount == 0:
-            return jsonify({"error": "Company not found"}), 404
-
-        # Return success response
-        response = make_response(jsonify({"message": "Company deleted successfully"}))
-        response.status_code = 200
-        return response
-
-    except Exception as e:
-        current_app.logger.error(f"Error deleting company: {e}")
-        return jsonify({"error": "Failed to delete company"}), 500
-    
-
-
 @companies.route('/deletebycompid', methods=['DELETE'])
 def delete_specific_tickets():
     the_data = request.json
@@ -138,8 +103,6 @@ def delete_specific_tickets():
     return response
     
 
-
-    
 @companies.route('/companies', methods=['POST'])
 def add_company():
     try:
@@ -176,3 +139,44 @@ def add_company():
     except Exception as e:
         current_app.logger.error(f"Error adding Company: {e}")
         return jsonify({"error": "Failed to add company"}), 500 
+    
+
+@companies.route('/companies/<CompanyID>', methods=['PUT'])
+def update_company(CompanyID):
+    try:
+        # Collect data from the request
+        the_data = request.json
+        current_app.logger.info(the_data)
+
+        # Extract variables from request
+        company_name = the_data.get('CompanyName')
+        industry = the_data.get('Industry')
+        location = the_data.get('Location')
+        notes = the_data.get('Notes')
+
+        # Construct the SQL query for updating the application
+        query = f'''
+            UPDATE Company
+            SET 
+                CompanyName = '{company_name}',
+                Industry = '{industry}',
+                Location = {location},
+            WHERE CompanyID = {CompanyID}
+        '''
+
+        # Log query for debugging
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute and commit the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        db.get_db().commit()
+
+        # Return a success response
+        response = make_response(jsonify({"message": "Company updated successfully"}))
+        response.status_code = 200
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error updating company: {e}")
+        return jsonify({"error": "Failed to update company"}), 500
