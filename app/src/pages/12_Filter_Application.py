@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import pandas as pd
 
 # Backend API URL
 API_URL = "http://api:4000/a/applications"
@@ -20,11 +21,17 @@ if st.button("Get Applications"):
         response = requests.get(f"{API_URL}/priority/{priority}")
         response.raise_for_status()
 
-        # Display the applications
+        # Process the data
         applications = response.json()
         if applications:
+            # Convert the JSON data to a Pandas DataFrame
+            df = pd.DataFrame(applications, columns=[
+                "ApplicationID", "DateSubmitted", "Status", "Priority", "Notes", "JobDescription", "CompanyName"
+            ])
+            
+            # Display the DataFrame as a Streamlit Data Table
             st.write(f"Applications with Priority {priority}:")
-            st.json(applications)
+            st.dataframe(df)
         else:
             st.warning(f"No applications found with Priority {priority}.")
 
