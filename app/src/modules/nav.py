@@ -45,7 +45,7 @@ def MapDemoNav():
 
 ## ------------------------ Examples for Role of usaid_worker ------------------------
 def ApiTestNav():
-    st.sidebar.page_link("pages/12_Add_Applications.py", label="Test the API", icon="🛜")
+    st.sidebar.page_link("pages/12_Get_Applications.py", label="Test the API", icon="🛜")
 
 
 def PredictionNav():
@@ -62,6 +62,12 @@ def ClassificationNav():
 
 
 
+def ThomasHome():
+    st.sidebar.page_link(
+        "pages/09_Thomas_Home.py", label="Thomas Home", icon="🏦"
+    )
+
+
 
 
 
@@ -74,7 +80,7 @@ def ClassificationNav():
 
 #### ------------------------ regular Student ------------------------
 def AddApplication():
-    st.sidebar.page_link("pages/51_Add_Applications.py", label="Add Applications", icon="🟢")
+    st.sidebar.page_link("pages/12_Get_Applications.py", label="Add Applications", icon="🟢")
 
 
 def DeleteApplication():
