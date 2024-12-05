@@ -68,8 +68,9 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
 # Add the page title
-st.markdown('<div class="title">Welcome to Kyries Dashboard!</div>', unsafe_allow_html=True)
+st.markdown("<div class='title'>Welcome to Kyrie's Dashboard!</div>", unsafe_allow_html=True)
 
 # Add the page subtitle
 st.markdown('<div class="subtitle">Manage your applications with ease using the tools below.</div>', unsafe_allow_html=True)
