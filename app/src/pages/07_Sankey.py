@@ -11,6 +11,9 @@ logger = logging.getLogger(__name__)
 # Add sidebar links
 SideBarLinks()
 
+if "student_nuid" in st.session_state and st.session_state.student_nuid is not None:
+    student_nuid = st.session_state.student_nuid
+
 # Title
 st.title("Dynamic Sankey Diagram")
 
@@ -19,8 +22,11 @@ Viewing the Flow of Applications Across Status Categories
 """
 
 # Fetch data from the Flask API
+
+API_URL = "http://api:4000/a/flowchart"
+
 try:
-    response = requests.get('http://api:4000/a/flowchart')
+    response = requests.get(f"{API_URL}/{student_nuid}")
     response.raise_for_status()  # Raise an error if the response status code is not 200
     data = response.json()
 except Exception as e:

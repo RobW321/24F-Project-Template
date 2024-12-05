@@ -238,8 +238,8 @@ def get_applications_by_status(status, Student_NUID):
 
     
 
-@applications.route('/flowchart', methods=['GET'])
-def get_flowchart_data():
+@applications.route('/flowchart/<student_nuid>', methods=['GET'])
+def get_flowchart_data(student_nuid):
     """
     Fetches all records from the FlowChart table in the database.
     """
@@ -252,11 +252,12 @@ def get_flowchart_data():
             NumRejected,
             NumAccepted
         FROM FlowChart
+        WHERE FlowChartID = %s
     '''
     
     # Get a cursor object from the database
     cursor = db.get_db().cursor()
-    cursor.execute(query)  # Execute the query
+    cursor.execute(query, (student_nuid,))  # Execute the query
     data = cursor.fetchall()  # Fetch all results
 
     # Return the data as JSON response

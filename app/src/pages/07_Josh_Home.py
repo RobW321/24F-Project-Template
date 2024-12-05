@@ -18,13 +18,14 @@ if "student_nuid" not in st.session_state:
 if st.button('Job Applications', 
              type='primary',
              use_container_width=True):
-    st.session_state.student_nuid = 1002  # Set the NUID to 1003
+    st.session_state.student_nuid = 1002  
     st.switch_page('pages/54_Job_Applications.py')
 
 if st.button('View Sankey Diagram', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/07_Sankey.py')
+    st.session_state.student_nuid = 1002  
+    st.switch_page('pages/07_Sankey.py')
 
 if st.button('Create Ticket', 
              type='primary',
