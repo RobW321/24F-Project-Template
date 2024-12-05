@@ -44,29 +44,37 @@ def get_user_applications(StudentNUID):
 @applications.route('/applications', methods=['POST'])
 def add_application():
     try:
-        # Get data from the request
-        data = request.json
-        nuid = data['StudentNUID']
-        job_id = data['JobID']
-        date_submitted = data['DateSubmitted']
-        status = data['Status']
-        priority = data['Priority']
-        notes = data.get('Notes', '')  # Optional notes field
+        # Collect data from the request
+        the_data = request.json
+        current_app.logger.info(the_data)
 
-        # SQL query to insert a new application
+        # Extract variables from request
+        student_nuid = the_data['StudentNUID']
+        job_id = the_data['JobID']
+        date_submitted = the_data['DateSubmitted']
+        status = the_data['Status']
+        priority = the_data['Priority']
+        notes = the_data['Notes']
+
+        # SQL query to insert the new application into the database
         query = f'''
             INSERT INTO Application (StudentNUID, JobID, DateSubmitted, Status, Priority, Notes)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            VALUES ({student_nuid}, {job_id}, '{date_submitted}', '{status}', {priority}, '{notes}')
         '''
 
-        # Execute the query
+        # Log query for debugging
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute and commit the query
         cursor = db.get_db().cursor()
-        cursor.execute(query, (nuid, job_id, date_submitted, status, priority, notes))
+        cursor.execute(query)
         db.get_db().commit()
 
-        current_app.logger.info(f"New application added for NUID {nuid}.")
-        return jsonify({"message": "Application added successfully"}), 201
+        # Return a success response
+        response = make_response(jsonify({"message": "Application added successfully"}))
+        response.status_code = 201
+        return response
 
     except Exception as e:
         current_app.logger.error(f"Error adding application: {e}")
-        return jsonify({"error": "Could not add application"}), 500
+        return jsonify({"error": "Failed to add application"}), 500
