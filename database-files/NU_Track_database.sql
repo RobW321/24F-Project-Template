@@ -110,13 +110,6 @@ CREATE TABLE Application (
     FOREIGN KEY (JobID) REFERENCES Job(JobID) ON DELETE CASCADE
 );
 
-/*CREATE TABLE IF NOT EXISTS `nutrack`.`applications` (
-  `ApplicationID` INT(11) PRIMARY KEY,
-  `DateSubmitted` VARCHAR(50) NULL DEFAULT NULL,
-  `Notes` VARCHAR(50) NULL DEFAULT NULL
-);*/
-
-
 CREATE TABLE Offers (
     OfferID INT PRIMARY KEY NOT NULL,
     PayRate INT NOT NULL,
