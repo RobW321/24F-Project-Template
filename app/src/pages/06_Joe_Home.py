@@ -22,7 +22,7 @@ if "student_nuid" not in st.session_state:
 if st.button('Add An Application', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/51_Add_Applications.py')
+  st.switch_page('pages/12_Add_Applications.py')
 
 if st.button(
     'View Applications',
