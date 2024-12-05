@@ -16,9 +16,9 @@ with st.form("edit_ticket_form"):
     # Create the various input widgets needed for 
     # each piece of information you're eliciting from the user
     status = st.text_input("Ticket Status")
-    priority = st.number_input("Priority")
-    employeeID = st.number_input("EmployeeID")
-    ticketID = st.number_input("TicketID to edit")
+    priority = st.number_input("Priority", min_value=1, step=1, format="%d")
+    employeeID = st.number_input("EmployeeID", min_value=1, step=1, format="%d")
+    ticketID = st.number_input("TicketID to edit", min_value=1, step=1, format="%d")
     
    
 # Add the submit button (which every form needs)

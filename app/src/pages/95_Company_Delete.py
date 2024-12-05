@@ -5,7 +5,7 @@ import requests
 with st.form("delete_company_form"):
     
    
-    companyID = st.number_input("CompanyID to delete")
+    companyID = st.number_input("CompanyID to delete", min_value=1, step=1, format="%d")
     
    
 # Add the submit button (which every form needs)

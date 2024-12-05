@@ -13,7 +13,7 @@ st.header('Delete Specific Job')
 with st.form("delete_job_form"):
     
    
-    JobID = st.number_input("JobID to Delete")
+    JobID = st.number_input("JobID to Delete", min_value=1, step=1, format="%d")
     
    
 # Add the submit button (which every form needs)
