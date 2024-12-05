@@ -146,5 +146,41 @@ def delete_interview(interview_id):
     except Exception as e:
         current_app.logger.error(f"Error deleting interview with ID {interview_id}: {e}")
         return make_response(jsonify({"error": "Internal server error"}), 500)
+    
+
+@interviews.route('/filter/round/<string:round>', methods=['GET'])
+def get_interviews_by_round(round):
+    try:
+        # SQL query to fetch interviews by round
+        query = '''
+            SELECT 
+                I.InterviewID,
+                I.Dates AS InterviewDate,
+                I.Locations AS InterviewLocation,
+                I.InterviewType,
+                I.Round,
+                C.CompanyName,
+                CONCAT(IV.FirstName, ' ', IV.LastName) AS InterviewerName,
+                IV.Email AS InterviewerEmail
+            FROM Interview I
+            JOIN Company C ON I.CompanyID = C.CompanyID
+            JOIN Interviewer IV ON I.InterviewerID = IV.InterviewerID
+            WHERE I.Round = %s
+        '''
+
+        current_app.logger.info(f"Executing query: {query}")
+        
+        cursor = db.get_db().cursor()
+        cursor.execute(query, (round))
+        data = cursor.fetchall()
+
+        response = make_response(jsonify(data))
+        response.status_code = 200
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error fetching interviews for round {round}: {e}")
+        return make_response(jsonify({"error": "Internal server error"}), 500)
+
 
 
