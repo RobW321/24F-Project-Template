@@ -6,4 +6,9 @@ These pages are meant to show you an example of some of the features of Streamli
 
 TODO: Describe the pages folder and include link to documentation. Don't forget about ordering of pages.
 
+All the Home pages feature buttons that navigate users to specific functionality, tailored to their respective personas. Each button directs users to a dedicated page for the associated action. For instance, every persona with a "View Applications" button on their home page is linked to a shared Get_Applications page.
+
+
+
+
 
