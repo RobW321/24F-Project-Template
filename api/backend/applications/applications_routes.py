@@ -196,6 +196,47 @@ def get_applications_by_priority(priority):
         return jsonify({"error": "Failed to fetch applications"}), 500
     
 
+@applications.route('/applications/status/<string:status>', methods=['GET'])
+def get_applications_by_status(status):
+    """
+    Fetches all applications with the specified status.
+    """
+    try:
+        # SQL query to fetch applications by status
+        query = f'''
+            SELECT 
+                a.ApplicationID,
+                a.DateSubmitted,
+                a.Status,
+                a.Priority,
+                a.Notes,
+                j.JobDescription,
+                c.CompanyName
+            FROM Application a
+            JOIN Job j ON a.JobID = j.JobID
+            JOIN Company c ON j.CompanyID = c.CompanyID
+            WHERE a.Status = '{status}'
+        '''
+        
+        # Log the query for debugging
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        theData = cursor.fetchall()
+
+        # Return the data
+        response = make_response(jsonify(theData))
+        response.status_code = 200
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error fetching applications by status: {e}")
+        return jsonify({"error": "Failed to fetch applications"}), 500
+
+    
+
 @applications.route('/flowchart', methods=['GET'])
 def get_flowchart_data():
     """
