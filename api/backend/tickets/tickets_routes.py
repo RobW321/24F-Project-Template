@@ -64,4 +64,16 @@ def update_tickets():
     return response
 
 
+@tickets.route('/delete', methods=['DELETE'])
+def delete_tickets():
+        # Define the query
+    query = "DELETE FROM Ticket WHERE Status = ?"
 
+        # Execute the query with the parameter
+    cursor = db.get_db().cursor()
+    cursor.execute(query, ('Closed',))  # Tuple is used even for a single parameter
+    
+    db.get_db().commit()
+    response = make_response("Successfully deleted closed tickets")
+    response.status_code = 200
+    return response

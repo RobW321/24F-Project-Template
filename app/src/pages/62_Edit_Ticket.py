@@ -51,9 +51,9 @@ with st.form("edit_ticket_form"):
             # for the web-app container 
             logger.info(f"Ticket form submitted with data: {ticket_data}")
             
-            # Now, we try to make a POST request to the proper end point
+            # Now, we try to make a put request to the proper end point
             try:
-                # using the requests library to POST to /p/product.  Passing
+                # using the requests library to put to /p/product.  Passing
                 # product_data to the endpoint through the json parameter.
                 # This particular end point is located in the products_routes.py
                 # file found in api/backend/products folder. 

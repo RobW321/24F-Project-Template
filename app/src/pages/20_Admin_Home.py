@@ -21,3 +21,9 @@ if st.button('Edit Tickets',
              type='primary',
              use_container_width=True):
   st.switch_page('pages/62_Edit_Ticket.py')
+
+
+if st.button('Delete Tickets', 
+             type='primary',
+             use_container_width=True):
+  st.switch_page('pages/61_Delete_Ticket.py')
