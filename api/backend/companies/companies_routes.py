@@ -12,7 +12,8 @@ tickets = Blueprint('companies', __name__)
 # and return them to the client
 def get_tickets():
     query = '''
-        
+        SELECT *
+        FROM Company
     '''
     
     # get a cursor object from the database
