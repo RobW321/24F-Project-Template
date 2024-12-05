@@ -22,5 +22,5 @@ if st.button('Job Applications',
 if st.button('Interviews', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/14_Get_Interviews.py')
+  st.switch_page('pages/17_Kyrie_Interviews.py')
 
