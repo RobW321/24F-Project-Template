@@ -1,6 +1,8 @@
 from flask import Blueprint
+from flask import request
 from flask import jsonify
 from flask import make_response
+from flask import current_app
 from backend.db_connection import db
 
 tickets = Blueprint('tickets', __name__)
@@ -35,5 +37,25 @@ def get_tickets():
     response.status_code = 200
     # send the response back to the client
     return response
+
+
+#------------------------------------------------------------
+# Update customer info for customer with particular userID
+#   Notice the manner of constructing the query.
+@tickets.route('/tickets/edit', methods=['PUT'])
+def update_tickets():
+    current_app.logger.info('PUT /tickets route')
+    ticket_info = request.json
+    cust_id = cust_info['id']
+    first = cust_info['first_name']
+    last = cust_info['last_name']
+    company = cust_info['company']
+
+    query = 'UPDATE customers SET first_name = %s, last_name = %s, company = %s where id = %s'
+    data = (first, last, company, cust_id)
+    cursor = db.get_db().cursor()
+    r = cursor.execute(query, data)
+    db.get_db().commit()
+    return 'customer updated!'
 
 

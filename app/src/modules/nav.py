@@ -17,6 +17,10 @@ def ViewTicketsNav():
     st.sidebar.page_link("pages/60_View_Tickets.py", label="View Tickets", icon="📋")
 
 
+def SakaiHomePage():
+    st.sidebar.page_link("pages/20_Admin_Home.py", label="Admin Home", icon="👤")
+
+
 #### ------------------------ General ------------------------
 def HomeNav():
     st.sidebar.page_link("Home.py", label="Home", icon="🏠")
@@ -175,9 +179,7 @@ def SideBarLinks(show_home=True):
 
         # If the user is an administrator, give them access to the administrator pages
         if st.session_state["role"] == "administrator":
-            EditTicketNav()
-            ReassignTicketNav()
-            ViewTicketsNav()
+            SakaiHomePage()
 
         if st.session_state["role"] == "experienced_student":
             AddApplication()
