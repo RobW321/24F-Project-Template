@@ -11,10 +11,15 @@ SideBarLinks()
 
 st.title('Welcome Josh!')
 
+if "student_nuid" not in st.session_state:
+    st.session_state.student_nuid = None
+
+# Button to navigate to "Job Applications"
 if st.button('Job Applications', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/54_Job_Applications.py')
+    st.session_state.student_nuid = 1002  # Set the NUID to 1003
+    st.switch_page('pages/54_Job_Applications.py')
 
 if st.button('View Sankey Diagram', 
              type='primary',
