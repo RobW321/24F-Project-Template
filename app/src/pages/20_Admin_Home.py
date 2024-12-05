@@ -11,22 +11,11 @@ SideBarLinks()
 
 st.title('System Admin Dashboard')
 
-if st.button('View Tickets', 
+if st.button('Tickets Dashboard', 
              type='primary',
              use_container_width=True):
-  st.switch_page('pages/60_View_Tickets.py')
+  st.switch_page('pages/65_TIckets_Home_page.py')
 
-
-if st.button('Edit Tickets', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/62_Edit_Ticket.py')
-
-
-if st.button('Delete Tickets', 
-             type='primary',
-             use_container_width=True):
-  st.switch_page('pages/61_Delete_Ticket.py')
 
 if st.button('View Companies', 
             type='primary',
