@@ -19,7 +19,7 @@ if st.button(
     # Set the student_nuid value in session state
     st.session_state.student_nuid = 1004
     # Navigate to the page displaying applications
-    st.switch_page('pages/12_Get_Applications.py')
+    st.switch_page('pages/12_Get_Interviews.py')
 
 if st.button('Add Applications', 
              type='primary',
