@@ -121,6 +121,43 @@ def add_application():
         current_app.logger.error(f"Error adding application: {e}")
         return jsonify({"error": "Failed to add application"}), 500 
     
+
+applications = Blueprint('applications', __name__)
+
+@applications.route('/applications/<ApplicationID>', methods=['DELETE'])
+def delete_application(ApplicationID):
+    """
+    Deletes a job application based on the ApplicationID.
+    """
+    try:
+        # SQL query to delete the application
+        query = f'''
+            DELETE FROM Application
+            WHERE ApplicationID = {ApplicationID}
+        '''
+        
+        # Log the query for debugging
+        current_app.logger.info(f"Executing query: {query}")
+
+        # Execute and commit the query
+        cursor = db.get_db().cursor()
+        cursor.execute(query)
+        db.get_db().commit()
+
+        # Check if any row was deleted
+        if cursor.rowcount == 0:
+            return jsonify({"error": "Application not found"}), 404
+
+        # Return success response
+        response = make_response(jsonify({"message": "Application deleted successfully"}))
+        response.status_code = 200
+        return response
+
+    except Exception as e:
+        current_app.logger.error(f"Error deleting application: {e}")
+        return jsonify({"error": "Failed to delete application"}), 500
+
+    
     
     
     
