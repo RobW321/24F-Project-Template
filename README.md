@@ -1,4 +1,4 @@
-# NUTracks
+# NUTrack
 
 Link to Project Demo Video: https://youtu.be/kdu2AG0IZ9w
 
