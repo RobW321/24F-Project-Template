@@ -40,7 +40,7 @@ def get_tickets():
 
 
 #------------------------------------------------------------
-# Update customer info for customer with particular userID TicketID, Description, Status, Priority, TicketType, EmployeeID, StudentNUID
+# Update customer info for customer with particular TicketID, Description, Status, Priority, TicketType, EmployeeID, StudentNUID
 #   Notice the manner of constructing the query.
 @tickets.route('/edit', methods=['PUT'])
 def update_tickets():
@@ -61,12 +61,13 @@ def update_tickets():
     db.get_db().commit()
     response = make_response("Successfully edited ticket")
     response.status_code = 200
+    
     return response
 
 
 @tickets.route('/delete', methods=['DELETE'])
 def delete_tickets():
-    query = "DELETE FROM Ticket WHERE Status = %s"  # For MySQL/PostgreSQL
+    query = "DELETE FROM Ticket WHERE Status = %s"  
     
 
         # Execute the query with the parameter
@@ -87,7 +88,7 @@ def delete_specific_tickets():
 
     
 
-    query = "DELETE FROM Ticket WHERE TicketID = %s"  # For MySQL/PostgreSQL
+    query = "DELETE FROM Ticket WHERE TicketID = %s"  
     
     current_app.logger.info(query)
     data = (ticketID)
