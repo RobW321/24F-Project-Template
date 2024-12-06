@@ -18,7 +18,7 @@ with st.form("edit_ticket_form"):
     status = st.text_input("Ticket Status")
     priority = st.number_input("Priority", min_value=1, step=1, format="%d")
     employeeID = st.number_input("EmployeeID", min_value=1, step=1, format="%d")
-    ticketID = st.number_input("TicketID to edit(-50 unless added)", min_value=1, step=1, format="%d")
+    ticketID = st.number_input("TicketID to edit(1-50 unless added)", min_value=1, step=1, format="%d")
     
    
 # Add the submit button (which every form needs)
