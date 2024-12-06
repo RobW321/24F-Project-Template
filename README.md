@@ -1,5 +1,7 @@
 # NUTracks
 
+Link to Project Demo Video: https://youtu.be/kdu2AG0IZ9w
+
 ## Team Members
 - **Christian Bacalhau** ([ChristianBacalhau](https://github.com/ChristianBacalhau))  
 - **Robel Wondwosen** ([RobW321](https://github.com/RobW321))  
