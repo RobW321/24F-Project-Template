@@ -19,7 +19,7 @@ st.markdown(
     """
 )
 
-# Section 2: Purpose of NUTracks
+# Section 2: Purpose of NUTrack
 st.header("Why NUTrack?")
 st.markdown(
     """
@@ -34,7 +34,7 @@ st.markdown(
 st.header("What Makes NUTrack Different?")
 st.markdown(
     """
-    Unlike traditional solutions, NUTracks focuses on addressing the lack of guidance and transparency in the co-op search process. Key features include:
+    Unlike traditional solutions, NUTrack focuses on addressing the lack of guidance and transparency in the co-op search process. Key features include:
     - **Tailored tracking tools** for users like Joe (first-time applicants) and Josh (data-driven users).
     - **Actionable data insights** to help students make informed decisions about their applications.
     - **Visualization tools**, such as Sankey flow charts, for a clear depiction of application progress over time.
@@ -45,7 +45,7 @@ st.markdown(
 st.header("Empowering Students")
 st.markdown(
     """
-    NUTracks combines personalized tracking with collective data insights to help students navigate the co-op search process with confidence and clarity. By leveraging our tools, users can streamline their job search and increase their chances of success.
+    NUTrack combines personalized tracking with collective data insights to help students navigate the co-op search process with confidence and clarity. By leveraging our tools, users can streamline their job search and increase their chances of success.
     """
 )
 
@@ -63,7 +63,7 @@ st.markdown(
 st.header("Meet the Team")
 st.markdown(
     """
-    Our team is made up of talented and dedicated individuals who worked together to bring NUTracks to life:
+    Our team is made up of talented and dedicated individuals who worked together to bring NUTrack to life:
     - **Christian Bacalhau** ([ChristianBacalhau](https://github.com/ChristianBacalhau))
     - **Robel Wondwosen** ([RobW321](https://github.com/RobW321))
     - **Matthew Faust** ([MatthewFaust](https://github.com/MatthewFaust))
