@@ -13,12 +13,12 @@ Link to Project Demo Video: https://youtu.be/kdu2AG0IZ9w
 ## Project Overview
 In today’s competitive tech job market, students often find themselves applying to hundreds of co-ops and internships just to secure a single interview. This process can be overwhelming and disorganized, with many resorting to basic spreadsheets or notes apps that lack the tools needed to track progress effectively.  
 
-Our application, **NUTracks**, addresses this problem by providing a dedicated, data-driven job application tracker tailored for co-op searches. With NUTracks, students can:
+Our application, **NUTrack**, addresses this problem by providing a dedicated, data-driven job application tracker tailored for co-op searches. With NUTrack, students can:
 - Organize their applications
 - Filter by status, priority, or other criteria
 - Prioritize their next steps with ease  
 
-NUTracks empowers students to take control of their co-op search process, reducing stress and improving outcomes.
+NUTrack empowers students to take control of their co-op search process, reducing stress and improving outcomes.
 
 ## Code Structure
 
