@@ -85,7 +85,7 @@ CREATE TABLE Company (
     SponsorID INT NOT NULL,
     SponsorshipHistory VARCHAR(100),
     FOREIGN KEY (SponsorID) REFERENCES VisaSponsor(SponsorID) 
-    ON UPDATE CASCADE 
+    ON UPDATE CASCADE
     ON DELETE CASCADE
 );
 
@@ -99,7 +99,7 @@ CREATE TABLE Job (
 );
 
 CREATE TABLE Application (
-    ApplicationID INT PRIMARY KEY AUTO_INCREMENT
+    ApplicationID INT PRIMARY KEY AUTO_INCREMENT, 
     DateSubmitted DATE NOT NULL,
     Status VARCHAR(50) NOT NULL,
     Priority INT NOT NULL,
@@ -139,7 +139,6 @@ CREATE TABLE Interview (
     FOREIGN KEY (CompanyID) REFERENCES Company(CompanyID) ON DELETE CASCADE,
     FOREIGN KEY (InterviewerID) REFERENCES Interviewer(InterviewerID)
 );
-
 
 
 -- Sample Data
